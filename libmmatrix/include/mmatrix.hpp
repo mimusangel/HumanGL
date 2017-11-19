@@ -1,0 +1,173 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mmatrix.hpp                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jrouthie <jrouthie@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/19 19:13:52 by jrouthie          #+#    #+#             */
+/*   Updated: 2017/11/20 00:40:13 by jrouthie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef MMATRIX_HPP
+# define MMATRIX_HPP
+
+namespace mmatrix
+{
+	class	Vec2;
+	class	Vec3;
+	class	Vec4;
+	class	Mat4x4;
+	class	Quad;
+
+	class	Vec2
+	{
+	public:
+		Vec2(void);
+		Vec2(float v);
+		Vec2(float x, float y);
+		Vec2(const Vec2 &v);
+		float		&operator[](const int i);
+		const float	&operator[](const int i) const;
+		Vec2 		&operator=(const Vec2 &v);
+		bool 		operator==(const Vec2 &v);
+		Vec2		operator+(const Vec2 &v);
+		Vec2 		&operator+=(const Vec2 &v);
+		Vec2		operator-(const Vec2 &v);
+		Vec2 		&operator-=(const Vec2 &v);
+		Vec2		operator*(const Vec2 &v);
+		Vec2 		&operator*=(const Vec2 &v);
+		Vec2		operator/(const Vec2 &v);
+		Vec2 		&operator/=(const Vec2 &v);
+		Vec2		operator+(float v);
+		Vec2 		&operator+=(float v);
+		Vec2		operator-(float v);
+		Vec2 		&operator-=(float v);
+		Vec2		operator*(float v);
+		Vec2 		&operator*=(float v);
+		Vec2		operator/(float v);
+		Vec2 		&operator/=(float v);
+		float		dot(const Vec2 &v);
+		float		length(void);
+		Vec2 		&normalise(void);
+	private:
+		float	_val[2];
+	};
+	class	Vec3
+	{
+	public:
+		Vec3(void);
+		Vec3(float v);
+		Vec3(float x, float y, float z);
+		Vec3(const Vec2 &v, float z);
+		Vec3(const Vec3 &v);
+		float		&operator[](const int i);
+		const float	&operator[](const int i) const;
+		Vec3 		&operator=(const Vec3 &v);
+		bool 		operator==(const Vec3 &v);
+		Vec3		operator+(const Vec3 &v);
+		Vec3 		&operator+=(const Vec3 &v);
+		Vec3		operator-(const Vec3 &v);
+		Vec3 		&operator-=(const Vec3 &v);
+		Vec3		operator*(const Vec3 &v);
+		Vec3 		&operator*=(const Vec3 &v);
+		Vec3		operator/(const Vec3 &v);
+		Vec3 		&operator/=(const Vec3 &v);
+		Vec3		operator+(float v);
+		Vec3 		&operator+=(float v);
+		Vec3		operator-(float v);
+		Vec3 		&operator-=(float v);
+		Vec3		operator*(float v);
+		Vec3 		&operator*=(float v);
+		Vec3		operator/(float v);
+		Vec3 		&operator/=(float v);
+		Vec3		cross(const Vec3 &v);
+		float		dot(const Vec3 &v);
+		float		length(void);
+		Vec3 		&normalise(void);
+	private:
+		float	_val[3];
+	};
+	class	Vec4
+	{
+	public:
+		Vec4(void);
+		Vec4(float v);
+		Vec4(float x, float y, float z, float w);
+		Vec4(const Vec2 &v, float z, float w);
+		Vec4(const Vec3 &v, float w);
+		Vec4(const Vec4 &v);
+		float		&operator[](const int i);
+		const float	&operator[](const int i) const;
+		Vec4 		&operator=(const Vec4 &v);
+		bool 		operator==(const Vec4 &v);
+		Vec4		operator+(const Vec4 &v);
+		Vec4 		&operator+=(const Vec4 &v);
+		Vec4		operator-(const Vec4 &v);
+		Vec4 		&operator-=(const Vec4 &v);
+		Vec4		operator*(const Vec4 &v);
+		Vec4 		&operator*=(const Vec4 &v);
+		Vec4		operator/(const Vec4 &v);
+		Vec4 		&operator/=(const Vec4 &v);
+		Vec4		operator+(float v);
+		Vec4 		&operator+=(float v);
+		Vec4		operator-(float v);
+		Vec4 		&operator-=(float v);
+		Vec4		operator*(float v);
+		Vec4 		&operator*=(float v);
+		Vec4		operator/(float v);
+		Vec4 		&operator/=(float v);
+		Vec4		cross(const Vec4 &v);
+		float		dot(const Vec4 &v);
+		float		length(void);
+		Vec4 		&normalise(void);
+	private:
+		float	_val[4];
+	};
+	class	Mat4x4
+	{
+	public:
+		Mat4x4(void);
+		Mat4x4(float v);
+		Mat4x4(float v[4][4]);
+		Mat4x4(const Quad &v);
+		Mat4x4(const Mat4x4 &v);
+		static Mat4x4	identity(void);
+		Vec4			&operator[](const int i);
+		const Vec4		&operator[](const int i) const;
+		Mat4x4 			&operator=(const Mat4x4 &v);
+		bool 			operator==(const Mat4x4 &v);
+		Mat4x4			operator+(const Mat4x4 &v);
+		Mat4x4 			&operator+=(const Mat4x4 &v);
+		Mat4x4			operator-(const Mat4x4 &v);
+		Mat4x4 			&operator-=(const Mat4x4 &v);
+		Mat4x4			operator*(const Mat4x4 &v);
+		Mat4x4 			&operator*=(const Mat4x4 &v);
+		Mat4x4			operator*(const Quad &v);
+		Mat4x4 			&operator*=(const Quad &v);
+		float			dot(const Mat4x4 &v);
+		float			length(void);
+		Mat4x4			&scale(const float v);
+		Mat4x4			&scale_aniso(const float v[3]);
+		Mat4x4			&rotate(const Vec3 &up, const float angle);
+		Mat4x4			&rotate_x(const float angle);
+		Mat4x4			&rotate_y(const float angle);
+		Mat4x4			&rotate_z(const float angle);
+		Mat4x4			&set_translate(const Vec3 &v);
+		Mat4x4			&translate(const Vec3 &v);
+		Mat4x4			&translate_in_place(const Vec3 &v);
+		Mat4x4 			transpose();
+	private:
+		Vec4			_val[4];
+	};
+	class	Quad
+	{
+	public:
+		Quad(Mat4x4 &v);
+	private:
+		Vec4			_val[4];
+	};
+}
+
+#endif
