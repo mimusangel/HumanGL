@@ -3,7 +3,7 @@ INC_DIR = include
 SRC_DIR = sources
 OBJ_DIR = obj
 FILES = humangl.cpp \
-	window.cpp
+	window.cpp shaders.cpp
 
 SRCS = $(addprefix $(SRC_DIR)/, $(FILES))
 OBJS = $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
