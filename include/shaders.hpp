@@ -1,7 +1,7 @@
 #ifndef SHADERS_HPP
 # define SHADERS_HPP
 
-# include "window.hpp"
+# include "humangl.hpp"
 
 class Shaders {
 private:

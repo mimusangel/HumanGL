@@ -1,10 +1,7 @@
 #ifndef WINDOW_HPP
 # define WINDOW_HPP
 
-# define GLEW_STATIC
-# include <GL/glew.h>
-# include <GLFW/glfw3.h>
-# include <string>
+# include "humangl.hpp"
 
 class Window {
 
