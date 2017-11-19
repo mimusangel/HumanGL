@@ -3,6 +3,7 @@ using namespace std;
 
 #include "window.hpp"
 #include "shaders.hpp"
+#include "mesh.hpp"
 
 int main()
 {
@@ -22,38 +23,26 @@ int main()
 				return (0);
 			if (!sample.build())
 				return (0);
-
-
-			GLuint VertexArrayID;
-			glGenVertexArrays(1, &VertexArrayID);
-			glBindVertexArray(VertexArrayID);
-			static const GLfloat g_vertex_buffer_data[] = {
-			   -1.0f, -1.0f, 0.0f,
-			   1.0f, -1.0f, 0.0f,
-			   0.0f,  1.0f, 0.0f,
-			};
-			GLuint vertexbuffer;
-			glGenBuffers(1, &vertexbuffer);
-			glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-			glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
-			glEnableVertexAttribArray(0);
-			glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
-			glBindBuffer(GL_ARRAY_BUFFER, 0);
-			glBindVertexArray(0);
-
-
+			Mesh mesh(1);
+			if (mesh.isCreated())
+			{
+				mesh.begin();
+				static const GLfloat g_vertex_buffer_data[] = {
+				   -1.0f, -1.0f, 0.0f,
+				   0.0f,  1.0f, 0.0f,
+				   1.0f, -1.0f, 0.0f,
+				};
+				mesh.add(0, GL_FLOAT, 3, (void *)g_vertex_buffer_data, 3);
+				mesh.end();
+			}
+			// glEnable(GL_DEPTH_TEST);
+			glEnable(GL_CULL_FACE);
+			glCullFace(GL_FRONT);
 			while (win.isOpen())
 			{
 				win.makeContextCurrent();
-
-				
 				sample.bind();
-				glBindVertexArray(VertexArrayID);
-				glDrawArrays(GL_TRIANGLES, 0, 3);
-				glBindVertexArray(0);
-
-
+				mesh.render(GL_TRIANGLES); // GL_LINE_STRIP
 				win.update();
 			}
 		}
