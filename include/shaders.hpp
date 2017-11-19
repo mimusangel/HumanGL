@@ -9,7 +9,6 @@ private:
 	GLuint			_vertex;
 	GLuint			_fragment;
 	GLuint			_geometry;
-	std::string		_error;
 
 public:
 	Shaders();
@@ -19,7 +18,6 @@ public:
 	int				loadGeometryShader(const char *path);
 	int				build(void);
 	void			bind(void);
-	std::string		&getError(void);
 	void			uniformMat4(GLchar *name, GLfloat *mat);
 	void			uniform1f(GLchar *name, GLfloat value);
 	void			uniform2f(GLchar *name, GLfloat *value);

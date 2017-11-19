@@ -71,13 +71,13 @@ int				Shaders::loadVertexShader(const char *path)
 {
 	if (!path)
 	{
-		_error = "(Vertex Shader) Le Chemin du fichier est NULL.";
+		std::cout << "(Vertex Shader) Le Chemin du fichier est NULL.\n";
 		return (0);
 	}
 	char *script = getFileContent(path);
 	if (!script)
 	{
-		_error = "(Vertex Shader) Erreur lecture du fichier";
+		std::cout << "(Vertex Shader) Erreur lecture du fichier\n";
 		return (0);
 	}
 	_vertex = glCreateShader(GL_VERTEX_SHADER);
@@ -90,13 +90,13 @@ int				Shaders::loadFragmentShader(const char *path)
 {
 	if (!path)
 	{
-		_error = "(Fragment Shader) Le Chemin du fichier est NULL.";
+		std::cout << "(Fragment Shader) Le Chemin du fichier est NULL.\n";
 		return (0);
 	}
 	char *script = getFileContent(path);
 	if (!script)
 	{
-		_error = "(Vertex Shader) Erreur lecture du fichier";
+		std::cout << "(Vertex Shader) Erreur lecture du fichier\n";
 		return (0);
 	}
 	_fragment = glCreateShader(GL_FRAGMENT_SHADER);
@@ -109,13 +109,13 @@ int				Shaders::loadGeometryShader(const char *path)
 {
 	if (!path)
 	{
-		_error = "(Geometry Shader) Le Chemin du fichier est NULL.";
+		std::cout << "(Geometry Shader) Le Chemin du fichier est NULL.\n";
 		return (0);
 	}
 	char *script = getFileContent(path);
 	if (!script)
 	{
-		_error = "(Vertex Shader) Erreur lecture du fichier";
+		std::cout << "(Vertex Shader) Erreur lecture du fichier\n";
 		return (0);
 	}
 	_geometry = glCreateShader(GL_GEOMETRY_SHADER);
@@ -155,10 +155,6 @@ void			Shaders::bind(void)
 	glUseProgram(_program);
 }
 
-std::string		&Shaders::getError(void)
-{
-	return (_error);
-}
 void			Shaders::uniformMat4(GLchar *name, GLfloat *mat)
 {
 	GLint id = glGetUniformLocation(_program, name);
