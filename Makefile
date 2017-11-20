@@ -47,9 +47,9 @@ dircreate:
 req: $(O_FILE)
 
 $(NAME): $(O_FILE) $(D_FILE)
-	# $(CC) -o $(@F) $(O_FILE) $(LIBS)
-	ar -rcs $(NAME) $(O_FILE)
-	ranlib $(NAME)
+	$(CC) -o $(@F) $(O_FILE) $(LIBS)
+	# ar -rcs $(NAME) $(O_FILE)
+	# ranlib $(NAME)
 obj/%.o: sources/%.cpp
 	$(CC) -o $@ -c $< $(CFLAGS)
 dep/%.d: sources/%.cpp
