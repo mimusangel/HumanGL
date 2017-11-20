@@ -6,7 +6,7 @@
 /*   By: jrouthie <jrouthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 21:15:11 by jrouthie          #+#    #+#             */
-/*   Updated: 2017/11/20 04:05:44 by jrouthie         ###   ########.fr       */
+/*   Updated: 2017/11/20 04:15:54 by jrouthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -328,7 +328,7 @@ namespace mmatrix
 				{-up[2] * s, 0, up[0] * s, 0},
 				{up[1] * s, -up[0] * s, 0, 0},
 				{0, 0, 0, 0}});
-		cc = identity() - t;
+		cc = Identity() - t;
 		cc.scale(c);
 		t += cc;
 		t += ss;
@@ -384,7 +384,7 @@ namespace mmatrix
 	}
 	Mat4x4			Mat4x4::translate(const Vec3 &v)
 	{
-		Mat4x4	mat = identity();
+		Mat4x4	mat = Identity();
 
 		mat[3][0] = v[0];
 		mat[3][1] = v[1];

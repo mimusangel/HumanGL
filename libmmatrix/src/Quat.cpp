@@ -6,7 +6,7 @@
 /*   By: jrouthie <jrouthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 21:15:11 by jrouthie          #+#    #+#             */
-/*   Updated: 2017/11/20 04:06:05 by jrouthie         ###   ########.fr       */
+/*   Updated: 2017/11/20 04:16:53 by jrouthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ namespace mmatrix
 		_val[2] = z;
 		_val[3] = w;
 	}
-	Quat		Quad::Identity(void)
+	Quat		Quat::Identity(void)
 	{
 		return (Quat(0.0f, 0.0f, 0.0f, 1.0f));
 	}
