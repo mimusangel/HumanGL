@@ -3,6 +3,10 @@
 
 # include "humangl.hpp"
 
+# ifndef BUFF_SIZE
+#  define BUFF_SIZE 8192
+# endif
+
 class Shaders {
 private:
 	GLuint			_program;

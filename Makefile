@@ -10,8 +10,8 @@ OBJS = $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 
 OBJ_ALL_DIR = $(dir $(OBJS))
 
-IFLAGS = -I ./$(INC_DIR) -I ~/.brew/Cellar/glfw/3.2.1/include -I ~/.brew/Cellar/glew/2.1.0/include
-LIBFLAGS = -L ~/.brew/Cellar/glfw/3.2.1/lib/ -lglfw -L ~/.brew/Cellar/glew/2.1.0/lib -lGLEW
+IFLAGS = -I ./$(INC_DIR) -I ~/.brew/Cellar/glfw/3.2.1/include -I ~/.brew/Cellar/glew/2.1.0/include -I ./libmmatrix/include
+LIBFLAGS = -L ~/.brew/Cellar/glfw/3.2.1/lib/ -lglfw -L ~/.brew/Cellar/glew/2.1.0/lib -lGLEW -L ./libmmatrix -lmmatrix
 FRAMEWORK = -framework OpenGL -framework AppKit
 CC = g++
 RM = /bin/rm -f
