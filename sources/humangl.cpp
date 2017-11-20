@@ -40,17 +40,41 @@ int main()
 			// glEnable(GL_DEPTH_TEST);
 			glEnable(GL_CULL_FACE);
 			glCullFace(GL_FRONT);
-			GLfloat test[16] = {
+			/*GLfloat test[16] = {
 				1.0f, 0.0f, 0.0f, 0.0f,
 				0.0f, 1.0f, 0.0f, 0.0f,
 				0.0f, 0.0f, 1.0f, 0.0f,
 				0.0f, 0.0f, 0.0f, 1.0f
-			};
+			};*/
+			mmatrix::Mat4x4 cam = mmatrix::Mat4x4::Identity();
+			mmatrix::Mat4x4	mvp;
+
+			{
+			const float	*a = (float*)&cam;
+			int	i = 0;
+			printf("mat : %f %f %f %f\n%f %f %f %f\n%f %f %f %f\n%f %f %f %f\n\n",
+				a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++]);
+			}
+			// cam.translate_in_place(mmatrix::Vec3(1, 0.2, 0.3));
+			// cam.set_translate(mmatrix::Vec3(0, 0, -1));
+			// cam = cam.translate(mmatrix::Vec3(0, 0, -1));
+			// cam.rotate_x(0.1f);
+			// cam.rotate(mmatrix::Vec3(0, 1, 0), 0.1f);
+			// cam[3][3] = 1;
+			{
+			const float	*a = (float*)&cam;
+			int	i = 0;
+			printf("mat : %f %f %f %f\n%f %f %f %f\n%f %f %f %f\n%f %f %f %f\n\n",
+				a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++]);
+			}
 			while (win.isOpen())
 			{
+				static int tt;
+				cam.rotate_x(0.01f * tt++);
 				win.makeContextCurrent();
 				sample.bind();
-				sample.uniformMat4((GLchar *)"projection", (GLfloat *)&perspective);
+				mvp = perspective * cam;
+				sample.uniformMat4((GLchar *)"projection", (GLfloat *)&mvp);
 				mesh.render(GL_TRIANGLES); // GL_LINE_STRIP
 				win.update();
 			}
