@@ -6,7 +6,7 @@
 /*   By: jrouthie <jrouthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 21:15:11 by jrouthie          #+#    #+#             */
-/*   Updated: 2017/11/20 03:30:17 by jrouthie         ###   ########.fr       */
+/*   Updated: 2017/11/20 04:16:53 by jrouthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,11 @@ namespace mmatrix
 		_val[2] = z;
 		_val[3] = w;
 	}
-	Quat		identity(void)
+	Quat		Quat::Identity(void)
 	{
 		return (Quat(0.0f, 0.0f, 0.0f, 1.0f));
 	}
-	Quat		Quat::rotate(Vec3 &up, const float angle)
+	Quat		Quat::Rotate(Vec3 &up, const float angle)
 	{
 		Vec3	v = up * sinf(angle / 2.0f);
 

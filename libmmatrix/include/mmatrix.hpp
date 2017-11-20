@@ -6,7 +6,7 @@
 /*   By: jrouthie <jrouthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 19:13:52 by jrouthie          #+#    #+#             */
-/*   Updated: 2017/11/20 03:48:43 by jrouthie         ###   ########.fr       */
+/*   Updated: 2017/11/20 04:16:37 by jrouthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,13 +136,13 @@ namespace mmatrix
 		Mat4x4(float v[4][4]);
 		Mat4x4(const Quat &v);
 		Mat4x4(const Mat4x4 &v);
-		static Mat4x4	identity(void);
-		static Mat4x4	fromEuler(Vec3 v);
-		static Mat4x4	frustum(float v[6]);
-		static Mat4x4	lookAt(const Vec3 &eye, Vec3 &center,
+		static Mat4x4	Identity(void);
+		static Mat4x4	FromEuler(Vec3 v);
+		static Mat4x4	Frustum(float v[6]);
+		static Mat4x4	LookAt(const Vec3 &eye, Vec3 &center,
 			const Vec3 &up);
-		static Mat4x4	ortho(float v[6]);
-		static Mat4x4	perspective(const float y_fov, const float aspect,
+		static Mat4x4	Ortho(float v[6]);
+		static Mat4x4	Perspective(const float y_fov, const float aspect,
 			const float near, const float far);
 		Vec4			&operator[](const int i);
 		const Vec4		&operator[](const int i) const;
@@ -178,8 +178,8 @@ namespace mmatrix
 		Quat(void);
 		Quat(float x, float y, float z, float w);
 		Quat(const Mat4x4 &v);
-		static Quat		identity(void);
-		static Quat		rotate(Vec3 &up, const float angle);
+		static Quat		Identity(void);
+		static Quat		Rotate(Vec3 &up, const float angle);
 		float			&operator[](const int i);
 		const float		&operator[](const int i) const;
 		Quat 			&operator=(const Quat &v);
