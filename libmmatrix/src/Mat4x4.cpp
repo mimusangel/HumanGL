@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Mat4x4.cpp                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jrouthie <jrouthie@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/19 21:15:11 by jrouthie          #+#    #+#             */
-/*   Updated: 2017/11/20 04:15:54 by jrouthie         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "mmatrix.hpp"
 #include <cmath>
 #include <cstring>
@@ -142,8 +130,9 @@ namespace mmatrix
 		return (Mat4x4((float[4][4]){
 			{a / aspect, 0.0f, 0.0f, 0.0f},
 			{0.0f, a, 0.0f, 0.0f},
-			{0.0f, 0.0f, -((far + near) / (far - near)), -1.0f},
-			{0.0f, 0.0f, -((2.0f * far * near) / (far - near)), 0.0f}
+			{0.0f, 0.0f, -((far + near) / (far - near)),
+				-((2.0f * far * near) / (far - near))},
+			{0.0f, 0.0f, -1.0f, 0.0f}
 		}));
 	}
 	Vec4			&Mat4x4::operator[](const int i)
