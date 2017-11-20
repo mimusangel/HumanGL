@@ -19,6 +19,7 @@ RM = /bin/rm -f
 all: build $(NAME)
 
 build :
+	@make -C libmmatrix
 	@mkdir -p $(OBJ_ALL_DIR)
 
 $(NAME): $(OBJS)
@@ -29,10 +30,12 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	$(CC) $(IFLAGS) -o $@ -c $<
 
 clean:
+	@make -C libmmatrix clean
 	$(RM) $(OBJS)
 	@echo "Make clean :\033[1;31m DONE !\033[m"
 
 fclean : clean
+	@make -C libmmatrix fclean
 	$(RM) -rf $(OBJ_ALL_DIR)
 	$(RM) $(NAME)
 	@echo "Make fclean :\033[1;31m DONE !\033[m"

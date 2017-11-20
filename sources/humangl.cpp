@@ -29,14 +29,14 @@ int main()
 			{
 				mesh.begin();
 				static const GLfloat g_vertex_buffer_data[] = {
-				   -1.0f, -1.0f, 0.0f,
-				   0.0f,  1.0f, 0.0f,
-				   1.0f, -1.0f, 0.0f,
+				   -1.0f, -1.0f, -3.0f,
+				   0.0f,  1.0f, -3.0f,
+				   1.0f, -1.0f, -3.0f,
 				};
 				mesh.add(0, GL_FLOAT, 3, (void *)g_vertex_buffer_data, 3);
 				mesh.end();
 			}
-			// mmatrix::Mat4x4 perspective = mmatrix::Mat4x4::perspective(70.0f, 1280.0f / 720.0f, 0.1f, 1000.0f);
+			mmatrix::Mat4x4 perspective = mmatrix::Mat4x4::Perspective(70.0f, 1280.0f / 720.0f, 0.1f, 1000.0f);
 			// glEnable(GL_DEPTH_TEST);
 			glEnable(GL_CULL_FACE);
 			glCullFace(GL_FRONT);
@@ -50,7 +50,7 @@ int main()
 			{
 				win.makeContextCurrent();
 				sample.bind();
-				sample.uniformMat4((GLchar *)"projection", test);
+				sample.uniformMat4((GLchar *)"projection", (GLfloat *)&perspective);
 				mesh.render(GL_TRIANGLES); // GL_LINE_STRIP
 				win.update();
 			}
