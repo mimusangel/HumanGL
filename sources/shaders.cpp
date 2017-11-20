@@ -1,5 +1,10 @@
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/uio.h>
+#include <fcntl.h>
+#include <stdlib.h>
+#include <unistd.h>
 #include <iostream>
-#include <fstream>
 #include <string>
 #include "shaders.hpp"
 
@@ -43,17 +48,54 @@ static GLint	get_shader_log(GLuint shader_id)
 	return (result);
 }
 
+static char		*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*str;
+	size_t	i;
+	size_t	j;
+
+	str = NULL;
+	i = (!s1) ? 0 : strlen(s1);
+	j = strlen(s2);
+	if ((str = (char *)malloc(sizeof(char) * (i + j + 1))) == NULL)
+		return (NULL);
+	i = 0;
+	while (s1 && s1[i])
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	j = 0;
+	while (s2 && s2[j])
+	{
+		str[i + j] = s2[j];
+		j++;
+	}
+	str[i + j] = '\0';
+	return (str);
+}
+
 static char		*getFileContent(const char *path)
 {
-	std::string shaderCode;
-	std::ifstream shaderStream;
-	shaderStream.open(path, std::ios::in);
-	if(shaderStream.is_open()){
-		std::string line = "";
-		while(getline(shaderStream, line))
-			shaderCode += "\n" + line;
-		shaderStream.close();
-		return ((char *)shaderCode.c_str());
+	char	buf[BUFF_SIZE + 1];
+	int		fd;
+	char	*str;
+	char	*tmp;
+	int		i;
+
+	if ((fd = open(path, O_RDONLY)) > 2)
+	{
+		str = NULL;
+		while ((i = read(fd, buf, BUFF_SIZE)) > 0)
+		{
+			buf[i] = '\0';
+			tmp = str;
+			str = ft_strjoin(str, buf);
+			if (tmp)
+				free(tmp);
+		}
+		close(fd);
+		return (str);
 	}
 	return (NULL);
 }
@@ -83,6 +125,7 @@ int				Shaders::loadVertexShader(const char *path)
 	_vertex = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(_vertex, 1, (const GLchar *const *)&script, NULL);
 	glCompileShader(_vertex);
+	free(script);
 	return (get_shader_log(_vertex));
 }
 
@@ -93,6 +136,7 @@ int				Shaders::loadFragmentShader(const char *path)
 		std::cout << "(Fragment Shader) Le Chemin du fichier est NULL.\n";
 		return (0);
 	}
+
 	char *script = getFileContent(path);
 	if (!script)
 	{
@@ -102,6 +146,7 @@ int				Shaders::loadFragmentShader(const char *path)
 	_fragment = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(_fragment, 1, (const GLchar *const *)&script, NULL);
 	glCompileShader(_fragment);
+	free(script);
 	return (get_shader_log(_fragment));
 }
 
@@ -121,6 +166,7 @@ int				Shaders::loadGeometryShader(const char *path)
 	_geometry = glCreateShader(GL_GEOMETRY_SHADER);
 	glShaderSource(_geometry, 1, (const GLchar *const *)&script, NULL);
 	glCompileShader(_geometry);
+	free(script);
 	return (get_shader_log(_geometry));
 }
 
