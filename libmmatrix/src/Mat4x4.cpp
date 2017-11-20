@@ -6,7 +6,7 @@
 /*   By: jrouthie <jrouthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 21:15:11 by jrouthie          #+#    #+#             */
-/*   Updated: 2017/11/20 00:43:55 by jrouthie         ###   ########.fr       */
+/*   Updated: 2017/11/20 01:57:22 by jrouthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,26 +149,21 @@ namespace mmatrix
 					this->_val[k][r] *= v[c][k];
 		return (*this);
 	}
-	/*Mat4x4			Mat4x4::operator*(const Quad &v)
+	Mat4x4			Mat4x4::operator*(Quad &v)
 	{
 		Mat4x4	mat;
+
+		mat[0] = Vec4(v * _val[0].xyz(), 0);
+		mat[1] = Vec4(v * _val[0].xyz(), 0);
+		mat[2] = Vec4(v * _val[0].xyz(), 0);
+		mat[3] = Vec4(0.0f, 0.0f, 0.0f, 1.0f);
+		return (mat);
 	}
-	Mat4x4 			&Mat4x4::operator*=(const Quad &v);
-
-	extern inline void	mat4x4o_mul_quat(t_mat4x4 r, t_mat4x4 m, t_quat q)
+	Mat4x4 			&Mat4x4::operator*=(Quad &v)
 	{
-		quat_mul_vec3(r[0], q, m[0]);
-		quat_mul_vec3(r[1], q, m[1]);
-		quat_mul_vec3(r[2], q, m[2]);
-		r[3][0] = 0.0f;
-		r[3][1] = 0.0f;
-		r[3][2] = 0.0f;
-		r[3][3] = 1.0f;
-	}*/
-
-
-
-
+		*this = *this * v;
+		return (*this);
+	}
 	float			Mat4x4::dot(const Mat4x4 &v)
 	{
 		float	d = 0;

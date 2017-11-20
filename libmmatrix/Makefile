@@ -6,7 +6,7 @@
 #    By: jrouthie <jrouthie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/19 19:12:24 by jrouthie          #+#    #+#              #
-#    Updated: 2017/11/20 00:44:08 by jrouthie         ###   ########.fr        #
+#    Updated: 2017/11/20 01:57:44 by jrouthie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ SRC = \
 	Vec2.cpp \
 	Vec3.cpp \
 	Vec4.cpp \
-	Mat4x4.cpp
+	Mat4x4.cpp \
+	Quad.cpp
 
 
 

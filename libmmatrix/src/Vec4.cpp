@@ -6,7 +6,7 @@
 /*   By: jrouthie <jrouthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 19:23:03 by jrouthie          #+#    #+#             */
-/*   Updated: 2017/11/20 00:43:09 by jrouthie         ###   ########.fr       */
+/*   Updated: 2017/11/20 01:32:45 by jrouthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,5 +239,9 @@ namespace mmatrix
 			this->_val[3] *= len;
 		}
 		return (*this);
+	}
+	Vec3			&Vec4::xyz(void)
+	{
+		return (*(Vec3*)this);
 	}
 }

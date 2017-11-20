@@ -6,7 +6,7 @@
 /*   By: jrouthie <jrouthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 19:13:52 by jrouthie          #+#    #+#             */
-/*   Updated: 2017/11/20 00:40:13 by jrouthie         ###   ########.fr       */
+/*   Updated: 2017/11/20 01:38:27 by jrouthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ namespace mmatrix
 		float		dot(const Vec4 &v);
 		float		length(void);
 		Vec4 		&normalise(void);
+		Vec3		&xyz(void);
 	private:
 		float	_val[4];
 	};
@@ -144,8 +145,8 @@ namespace mmatrix
 		Mat4x4 			&operator-=(const Mat4x4 &v);
 		Mat4x4			operator*(const Mat4x4 &v);
 		Mat4x4 			&operator*=(const Mat4x4 &v);
-		Mat4x4			operator*(const Quad &v);
-		Mat4x4 			&operator*=(const Quad &v);
+		Mat4x4			operator*(Quad &v);
+		Mat4x4 			&operator*=(Quad &v);
 		float			dot(const Mat4x4 &v);
 		float			length(void);
 		Mat4x4			&scale(const float v);
@@ -164,9 +165,12 @@ namespace mmatrix
 	class	Quad
 	{
 	public:
+		Quad(void);
 		Quad(Mat4x4 &v);
+		Vec3			operator*(const Vec3 &v);
+		Vec3			&xyz(void);
 	private:
-		Vec4			_val[4];
+		float			_val[4];
 	};
 }
 
