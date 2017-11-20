@@ -6,7 +6,7 @@
 /*   By: jrouthie <jrouthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 19:13:52 by jrouthie          #+#    #+#             */
-/*   Updated: 2017/11/20 01:38:27 by jrouthie         ###   ########.fr       */
+/*   Updated: 2017/11/20 03:48:43 by jrouthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ namespace mmatrix
 	class	Vec3;
 	class	Vec4;
 	class	Mat4x4;
-	class	Quad;
+	class	Quat;
 
 	class	Vec2
 	{
@@ -82,6 +82,7 @@ namespace mmatrix
 		Vec3 		&operator*=(float v);
 		Vec3		operator/(float v);
 		Vec3 		&operator/=(float v);
+		float		mulInner(const Vec3 &v);
 		Vec3		cross(const Vec3 &v);
 		float		dot(const Vec3 &v);
 		float		length(void);
@@ -118,6 +119,7 @@ namespace mmatrix
 		Vec4 		&operator*=(float v);
 		Vec4		operator/(float v);
 		Vec4 		&operator/=(float v);
+		float		mulInner(const Vec4 &v);
 		Vec4		cross(const Vec4 &v);
 		float		dot(const Vec4 &v);
 		float		length(void);
@@ -132,9 +134,16 @@ namespace mmatrix
 		Mat4x4(void);
 		Mat4x4(float v);
 		Mat4x4(float v[4][4]);
-		Mat4x4(const Quad &v);
+		Mat4x4(const Quat &v);
 		Mat4x4(const Mat4x4 &v);
 		static Mat4x4	identity(void);
+		static Mat4x4	fromEuler(Vec3 v);
+		static Mat4x4	frustum(float v[6]);
+		static Mat4x4	lookAt(const Vec3 &eye, Vec3 &center,
+			const Vec3 &up);
+		static Mat4x4	ortho(float v[6]);
+		static Mat4x4	perspective(const float y_fov, const float aspect,
+			const float near, const float far);
 		Vec4			&operator[](const int i);
 		const Vec4		&operator[](const int i) const;
 		Mat4x4 			&operator=(const Mat4x4 &v);
@@ -145,8 +154,9 @@ namespace mmatrix
 		Mat4x4 			&operator-=(const Mat4x4 &v);
 		Mat4x4			operator*(const Mat4x4 &v);
 		Mat4x4 			&operator*=(const Mat4x4 &v);
-		Mat4x4			operator*(Quad &v);
-		Mat4x4 			&operator*=(Quad &v);
+		Mat4x4			operator*(Quat &v);
+		Mat4x4 			&operator*=(Quat &v);
+		Vec4			row(const int i);
 		float			dot(const Mat4x4 &v);
 		float			length(void);
 		Mat4x4			&scale(const float v);
@@ -156,18 +166,33 @@ namespace mmatrix
 		Mat4x4			&rotate_y(const float angle);
 		Mat4x4			&rotate_z(const float angle);
 		Mat4x4			&set_translate(const Vec3 &v);
-		Mat4x4			&translate(const Vec3 &v);
+		Mat4x4			translate(const Vec3 &v);
 		Mat4x4			&translate_in_place(const Vec3 &v);
 		Mat4x4 			transpose();
 	private:
 		Vec4			_val[4];
 	};
-	class	Quad
+	class	Quat
 	{
 	public:
-		Quad(void);
-		Quad(Mat4x4 &v);
+		Quat(void);
+		Quat(float x, float y, float z, float w);
+		Quat(const Mat4x4 &v);
+		static Quat		identity(void);
+		static Quat		rotate(Vec3 &up, const float angle);
+		float			&operator[](const int i);
+		const float		&operator[](const int i) const;
+		Quat 			&operator=(const Quat &v);
+		bool 			operator==(const Quat &v);
+		Quat			operator+(const Quat &v);
+		Quat 			&operator+=(const Quat &v);
+		Quat			operator-(const Quat &v);
+		Quat 			&operator-=(const Quat &v);
+		Quat			operator*(Quat &v);
+		Quat 			&operator*=(Quat &v);
 		Vec3			operator*(const Vec3 &v);
+		float			mulInner(const Quat &v);
+		Quat			&scale(const float v);
 		Vec3			&xyz(void);
 	private:
 		float			_val[4];

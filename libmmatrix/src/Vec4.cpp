@@ -6,7 +6,7 @@
 /*   By: jrouthie <jrouthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 19:23:03 by jrouthie          #+#    #+#             */
-/*   Updated: 2017/11/20 01:32:45 by jrouthie         ###   ########.fr       */
+/*   Updated: 2017/11/20 02:40:58 by jrouthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,14 @@ namespace mmatrix
 		this->_val[2] /= v;
 		this->_val[3] /= v;
 		return (*this);
+	}
+	float		Vec4::mulInner(const Vec4 &v)
+	{
+		return (
+			_val[0] * v[0] +
+			_val[1] * v[1] +
+			_val[2] * v[2] +
+			_val[3] * v[3]);
 	}
 	Vec4		Vec4::cross(const Vec4 &v)
 	{

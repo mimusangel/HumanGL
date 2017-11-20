@@ -6,7 +6,7 @@
 /*   By: jrouthie <jrouthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 21:15:11 by jrouthie          #+#    #+#             */
-/*   Updated: 2017/11/20 01:57:22 by jrouthie         ###   ########.fr       */
+/*   Updated: 2017/11/20 03:57:56 by jrouthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,41 @@ namespace mmatrix
 	{
 		memcpy(this->_val, v, sizeof(float) * 4 * 4);
 	}
+	Mat4x4::Mat4x4(const Quat &v)
+	{
+		const float	sqw = v[3] * v[3];
+		const float	sqx = v[0] * v[0];
+		const float	sqy = v[1] * v[1];
+		const float	sqz = v[2] * v[2];
+		const float	invs = 1.0f / (sqw + sqx + sqy + sqz);
+		float		tmp1;
+		float		tmp2;
+
+		tmp1 = v[0] * v[1];
+		tmp2 = v[2] * v[3];
+		_val[0][0] = (sqx - sqy - sqz + sqw) * invs;
+		_val[1][1] = (-sqx + sqy - sqz + sqw) * invs;
+		_val[2][2] = (-sqx - sqy + sqz + sqw) * invs;
+		tmp1 = v[0] * v[1];
+		tmp2 = v[2] * v[3];
+		_val[1][0] = 2.0 * (tmp1 + tmp2) * invs;
+		_val[0][1] = 2.0 * (tmp1 - tmp2) * invs;
+		tmp1 = v[0] * v[2];
+		tmp2 = v[1] * v[3];
+		_val[2][0] = 2.0 * (tmp1 - tmp2) * invs;
+		_val[0][2] = 2.0 * (tmp1 + tmp2) * invs;
+		tmp1 = v[1] * v[2];
+		tmp2 = v[0] * v[3];
+		_val[2][1] = 2.0 * (tmp1 + tmp2) * invs;
+		_val[1][2] = 2.0 * (tmp1 - tmp2) * invs;
+		_val[0][3] = 0.0f;
+		_val[1][3] = 0.0f;
+		_val[2][3] = 0.0f;
+		_val[3][0] = 0.0f;
+		_val[3][1] = 0.0f;
+		_val[3][2] = 0.0f;
+		_val[3][3] = 0.0f;
+	}
 	Mat4x4::Mat4x4(const Mat4x4 &v)
 	{
 		for (int x = 0; x < 4; x++)
@@ -43,6 +78,73 @@ namespace mmatrix
 			{0, 1, 0, 0},
 			{0, 0, 1, 0},
 			{0, 0, 0, 1}}));
+	}
+	Mat4x4	Mat4x4::fromEuler(Vec3 v)
+	{
+		float	t[6];
+
+		t[0] = cosf(v[1]);
+		t[1] = sinf(v[1]);
+		t[2] = cosf(v[0]);
+		t[3] = sinf(v[0]);
+		t[4] = cosf(v[2]);
+		t[5] = sinf(v[2]);
+		return (Mat4x4((float[4][4]){
+			{t[0] * t[2], t[1] * t[5] - t[0] * t[3] * t[4],
+				t[0] * t[3] * t[5] + t[1] * t[4], 0},
+			{t[3], t[2] * t[4], -t[2] * t[5], 0},
+			{-t[1] * t[2], t[1] * t[3] * t[4] + t[0] * t[5],
+				-t[1] * t[3] * t[5] + t[0] * t[4], 0},
+			{0, 0, 0, 1}
+		}));
+	}
+	Mat4x4	Mat4x4::frustum(float v[6])
+	{
+		return (Mat4x4((float[4][4]){
+			{2.0f * v[4] / (v[1] - v[0]), 0.0f, 0.0f, 0.0f},
+			{2.0f * v[4] / (v[3] - v[2]), 0.0f, 0.0f, 0.0f},
+			{(v[1] + v[0]) / (v[1] - v[0]), (v[3] + v[2]) / (v[3] - v[2]),
+				-(v[5] + v[4]) / (v[5] - v[4]), -1.0f},
+			{-2.0f * (v[5] * v[4]) / (v[5] - v[4]), 0.0f, 0.0f, 0.0f}
+		}));
+	}
+	Mat4x4	Mat4x4::lookAt(const Vec3 &eye, Vec3 &center,
+		const Vec3 &up)
+	{
+		Vec3	f = center - eye;
+		f.normalise();
+		Vec3	s = f.cross(up);
+		s.normalise();
+		Vec3	t = s.cross(f);
+		Mat4x4	mat((float[4][4]){
+			{s[0], t[0], -f[0], 0.0f},
+			{s[1], t[1], -f[1], 0.0f},
+			{s[2], t[2], -f[2], 0.0f},
+			{0.0f, 0.0f, 0.0f, 1.0f}
+		});
+		return (mat.translate_in_place(Vec3(-eye[0], -eye[1], -eye[2])));
+	}
+	Mat4x4	Mat4x4::ortho(float v[6])
+	{
+		return (Mat4x4((float[4][4]){
+			{2.0f / (v[1] - v[0]), 0.0f, 0.0f, 0.0f},
+			{2.0f / (v[3] - v[2]), 0.0f, 0.0f, 0.0f},
+			{-2.0f / (v[5] - v[4]), 0.0f, 0.0f, 0.0f},
+			{-(v[1] + v[0]) / (v[1] - v[0]), -(v[3] + v[2]) / (v[3] - v[2]),
+				-(v[5] + v[4]) / (v[5] - v[4]), 1.0f}
+		}));
+	}
+	Mat4x4	Mat4x4::perspective(const float y_fov, const float aspect,
+		const float near, const float far)
+	{
+		const float	a = 1.0f / tanf(y_fov / 2.0f);
+
+		return (Mat4x4((float[4][4]){
+			{a / aspect, 0.0f, 0.0f, 0.0f},
+			{0.0f, a, 0.0f, 0.0f},
+			{0.0f, 0.0f, -((far + near) / (far - near)), -1.0f},
+			{0.0f, 0.0f, -((2.0f * far * near) / (far - near)), 0.0f}
+		}));
 	}
 	Vec4			&Mat4x4::operator[](const int i)
 	{
@@ -149,7 +251,7 @@ namespace mmatrix
 					this->_val[k][r] *= v[c][k];
 		return (*this);
 	}
-	Mat4x4			Mat4x4::operator*(Quad &v)
+	Mat4x4			Mat4x4::operator*(Quat &v)
 	{
 		Mat4x4	mat;
 
@@ -159,10 +261,18 @@ namespace mmatrix
 		mat[3] = Vec4(0.0f, 0.0f, 0.0f, 1.0f);
 		return (mat);
 	}
-	Mat4x4 			&Mat4x4::operator*=(Quad &v)
+	Mat4x4 			&Mat4x4::operator*=(Quat &v)
 	{
 		*this = *this * v;
 		return (*this);
+	}
+	Vec4			Mat4x4::row(const int i)
+	{
+		return (Vec4(
+			_val[0][i],
+			_val[1][i],
+			_val[2][i],
+			_val[3][i]));
 	}
 	float			Mat4x4::dot(const Mat4x4 &v)
 	{
@@ -226,11 +336,76 @@ namespace mmatrix
 		*this *= t;
 		return (*this);
 	}
-	/*Mat4x4			&Mat4x4::rotate_x(const float angle);
-	Mat4x4			&Mat4x4::rotate_y(const float angle);
-	Mat4x4			&Mat4x4::rotate_z(const float angle);
-	Mat4x4			&Mat4x4::set_translate(const Vec3 &v);
-	Mat4x4			&Mat4x4::translate(const Vec3 &v);
-	Mat4x4			&Mat4x4::translate_in_place(const Vec3 &v);
-	Mat4x4 			Mat4x4::transpose();*/
+	Mat4x4			&Mat4x4::rotate_x(const float angle)
+	{
+		const float		s = sinf(angle);
+		const float		c = cosf(angle);
+
+		*this *= Mat4x4((float[4][4]){
+			{1.0f, 0.0f, 0.0f, 0.0f},
+			{0.0f, c, s, 0.0f},
+			{0.0f, -s, c, 0.0f},
+			{0.0f, 0.0f, 0.0f, 1.0f}
+		});
+		return (*this);
+	}
+	Mat4x4			&Mat4x4::rotate_y(const float angle)
+	{
+		const float		s = sinf(angle);
+		const float		c = cosf(angle);
+
+		*this *= Mat4x4((float[4][4]){
+			{c, 0.0f, s, 0.0f},
+			{0.0f, 1.0f, 0.0f, 0.0f},
+			{-s, 0.0f, c, 0.0f},
+			{0.0f, 0.0f, 0.0f, 1.0f}
+		});
+		return (*this);
+	}
+	Mat4x4			&Mat4x4::rotate_z(const float angle)
+	{
+		const float		s = sinf(angle);
+		const float		c = cosf(angle);
+
+		*this *= Mat4x4((float[4][4]){
+			{c, s, 0.0f, 0.0f},
+			{-s, c, 0.0f, 0.0f},
+			{0.0f, 0.0f, 1.0f, 0.0f},
+			{0.0f, 0.0f, 0.0f, 1.0f}
+		});
+		return (*this);
+	}
+	Mat4x4			&Mat4x4::set_translate(const Vec3 &v)
+	{
+		_val[3][0] = v[0];
+		_val[3][1] = v[1];
+		_val[3][2] = v[2];
+		return (*this);
+	}
+	Mat4x4			Mat4x4::translate(const Vec3 &v)
+	{
+		Mat4x4	mat = identity();
+
+		mat[3][0] = v[0];
+		mat[3][1] = v[1];
+		mat[3][2] = v[2];
+		return (mat);
+	}
+	Mat4x4			&Mat4x4::translate_in_place(const Vec3 &v)
+	{
+		Vec4	t(v, 0);
+
+		for (int i = 0; i < 4; i++)
+			_val[3][i] += row(i).mulInner(t);
+		return (*this);
+	}
+	Mat4x4 			Mat4x4::transpose()
+	{
+		Mat4x4	out;
+
+		for (int x = 0; x < 4; x++)
+			for (int y = 0; y < 4; y++)
+				out[x][y] = _val[y][x];
+		return (out);
+	}
 }
