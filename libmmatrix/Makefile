@@ -1,4 +1,4 @@
-CC = gcc
+CC = g++
 RM = /bin/rm -f
 RMDIR = /bin/rm -rf
 MKDIR = /bin/mkdir -p

@@ -1,45 +1,74 @@
-NAME = humangl
-INC_DIR = include
-SRC_DIR = sources
-OBJ_DIR = obj
-FILES = humangl.cpp \
-	window.cpp shaders.cpp mesh.cpp
-
-SRCS = $(addprefix $(SRC_DIR)/, $(FILES))
-OBJS = $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
-
-OBJ_ALL_DIR = $(dir $(OBJS))
-
-IFLAGS = -I ./$(INC_DIR) -I ~/.brew/Cellar/glfw/3.2.1/include -I ~/.brew/Cellar/glew/2.1.0/include -I ./libmmatrix/include
-LIBFLAGS = -L ~/.brew/Cellar/glfw/3.2.1/lib/ -lglfw -L ~/.brew/Cellar/glew/2.1.0/lib -lGLEW -L ./libmmatrix -lmmatrix
-FRAMEWORK = -framework OpenGL -framework AppKit
 CC = g++
 RM = /bin/rm -f
+RMDIR = /bin/rm -rf
+MKDIR = /bin/mkdir -p
+MAKE = make --no-print-directory
 
-all: build $(NAME)
+#------------------------------------------------------------------------------#
 
-build :
-	@make -C libmmatrix
-	@mkdir -p $(OBJ_ALL_DIR)
+NAME = humangl
+LIB_NAME = mmatrix
+LIBS = -lm -framework OPENGL `pkg-config --static --libs glfw3` \
+	`pkg-config --static --libs glew`
+SRC = \
+	humangl.cpp \
+	window.cpp \
+	shaders.cpp \
+	mesh.cpp
 
-$(NAME): $(OBJS)
-	$(CC) -o $@ $^ $(LIBFLAGS) $(FRAMEWORK)
-	@echo "Make $(NAME) :\033[1;32m DONE !\033[m"
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	$(CC) $(IFLAGS) -o $@ -c $<
 
+
+DIR =
+
+
+CFLAGS = -Wall -Wextra -Ofast -march=native -flto -I ~/.brew/include
+
+
+
+#------------------------------------------------------------------------------#
+
+C_FILE = $(addprefix sources/, $(SRC))
+O_FILE = $(addprefix obj/, $(SRC:.cpp=.o))
+D_FILE = $(addprefix dep/, $(SRC:.cpp=.d))
+CFLAGS += -I include $(addprefix -I lib, $(addsuffix /include, $(LIB_NAME)))
+LIB_DIR = $(addprefix lib, $(LIB_NAME))
+LIBS += $(addprefix -L , $(LIB_DIR)) $(addprefix -l, $(LIB_NAME))
+.PHONY: all dircreate clean fclean ffclean run ar re req
+
+all: dircreate $(join $(addsuffix /, $(LIB_DIR)), $(addsuffix .a, $(LIB_DIR)))
+	$(MAKE) $(NAME)
+%.a:
+	$(MAKE) -C $(dir $@)
+
+dircreate:
+	@$(MKDIR) obj $(addprefix obj/, $(DIR))
+	@$(MKDIR) dep $(addprefix dep/, $(DIR))
+req: $(O_FILE)
+
+$(NAME): $(O_FILE) $(D_FILE)
+	# $(CC) -o $(@F) $(O_FILE) $(LIBS)
+	ar -rcs $(NAME) $(O_FILE)
+	ranlib $(NAME)
+obj/%.o: sources/%.cpp
+	$(CC) -o $@ -c $< $(CFLAGS)
+dep/%.d: sources/%.cpp
+	@set -e; rm -f $@; \
+	$(CC) -MM $(CFLAGS) $< > $@.$$$$; \
+		sed 's,\($*\)\.o[ :]*,obj/\1.o $@ : ,g' < $@.$$$$ >> $@; \
+		$(RM) $@.$$$$
 clean:
-	@make -C libmmatrix clean
-	$(RM) $(OBJS)
-	@echo "Make clean :\033[1;31m DONE !\033[m"
-
-fclean : clean
-	@make -C libmmatrix fclean
-	$(RM) -rf $(OBJ_ALL_DIR)
+	$(RM) $(O_FILE)
+	$(RM) $(D_FILE)
+fclean: clean
 	$(RM) $(NAME)
-	@echo "Make fclean :\033[1;31m DONE !\033[m"
-
+	$(RMDIR) obj
+	$(RMDIR) dep
+ffclean: fclean
+	$(addprefix $(MAKE) fclean -C , $(addsuffix ;, $(LIB_DIR)))
+run:
+	./$(NAME)
+ar: all run
 re: fclean all
 
-.PHONY: all clean fclean re build
+-include $(D_FILE)
