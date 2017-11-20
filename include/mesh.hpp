@@ -15,7 +15,7 @@ public:
 	~Mesh();
 	bool			isCreated(void);
 	void			begin(void);
-	void			add(GLuint index, GLenum type, size_t width, void *data, size_t dataSize);
+	void			add(GLuint index, GLenum type, size_t width, void *data, size_t dataSize, GLenum usage = GL_STATIC_DRAW);
 	void			end(void);
 	void			render(GLenum mode);
 };

@@ -29,17 +29,20 @@ int main()
 			{
 				mesh.begin();
 				static const GLfloat g_vertex_buffer_data[] = {
-				   -1.0f, -1.0f, 3.0f,
-				   0.0f,  1.0f, 3.0f,
-				   1.0f, -1.0f, 3.0f,
+				   -1.0f, -1.0f, 0.0f,
+				   0.0f,  1.0f, 0.0f,
+				   1.0f, -1.0f, 0.0f,
 				};
 				mesh.add(0, GL_FLOAT, 3, (void *)g_vertex_buffer_data, 3);
 				mesh.end();
 			}
 			mmatrix::Mat4x4 perspective = mmatrix::Mat4x4::Perspective(70.0f, 1280.0f / 720.0f, 0.1f, 1000.0f);
+			mmatrix::Mat4x4 model;
+			model = model.translate(mmatrix::Vec3(0, 0, 3));
 			// glEnable(GL_DEPTH_TEST);
 			glEnable(GL_CULL_FACE);
 			glCullFace(GL_FRONT);
+<<<<<<< HEAD
 			/*GLfloat test[16] = {
 				1.0f, 0.0f, 0.0f, 0.0f,
 				0.0f, 1.0f, 0.0f, 0.0f,
@@ -67,14 +70,21 @@ int main()
 			printf("mat : %f %f %f %f\n%f %f %f %f\n%f %f %f %f\n%f %f %f %f\n\n",
 				a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++]);
 			}
+=======
+>>>>>>> refs/remotes/origin/master
 			while (win.isOpen())
 			{
 				static int tt;
 				cam.rotate_x(0.01f * tt++);
 				win.makeContextCurrent();
 				sample.bind();
+<<<<<<< HEAD
 				mvp = perspective * cam;
 				sample.uniformMat4((GLchar *)"projection", (GLfloat *)&mvp);
+=======
+				sample.uniformMat4((GLchar *)"projection", (GLfloat *)&perspective);
+				sample.uniformMat4((GLchar *)"model", (GLfloat *)&model);
+>>>>>>> refs/remotes/origin/master
 				mesh.render(GL_TRIANGLES); // GL_LINE_STRIP
 				win.update();
 			}

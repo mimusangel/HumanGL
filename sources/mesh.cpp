@@ -39,7 +39,7 @@ void			Mesh::begin(void)
 	glBindVertexArray(_vao);
 }
 
-void			Mesh::add(GLuint index, GLenum type, size_t width, void *data, size_t dataSize)
+void			Mesh::add(GLuint index, GLenum type, size_t width, void *data, size_t dataSize, GLenum usage)
 {
 	size_t	s;
 	if (type == GL_FLOAT)
@@ -62,7 +62,7 @@ void			Mesh::add(GLuint index, GLenum type, size_t width, void *data, size_t dat
 		s = sizeof(float);
 	_size = dataSize;
 	glBindBuffer(GL_ARRAY_BUFFER, _vbo[index]);
-	glBufferData(GL_ARRAY_BUFFER, s * width * dataSize, data, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, s * width * dataSize, data, usage);
 	glVertexAttribPointer(index, width, type, GL_FALSE, 0, (void *)0);
 	glEnableVertexAttribArray(index);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
