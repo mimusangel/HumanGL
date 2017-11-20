@@ -233,10 +233,7 @@ namespace mmatrix
 	}
 	Mat4x4 			&Mat4x4::operator*=(const Mat4x4 &v)
 	{
-		for (int c = 0; c < 4; c++)
-			for (int r = 0; r < 4; r++)
-				for (int k = 0; k < 4; k++)
-					this->_val[k][r] *= v[c][k];
+		*this = *this * v;
 		return (*this);
 	}
 	Mat4x4			Mat4x4::operator*(Quat &v)
@@ -383,8 +380,10 @@ namespace mmatrix
 	{
 		Vec4	t(v, 0);
 
-		for (int i = 0; i < 4; i++)
-			_val[3][i] += row(i).mulInner(t);
+		_val[3][0] += row(0).mulInner(t);
+		_val[3][1] += row(1).mulInner(t);
+		_val[3][2] += row(2).mulInner(t);
+		_val[3][3] += row(3).mulInner(t);
 		return (*this);
 	}
 	Mat4x4 			Mat4x4::transpose()

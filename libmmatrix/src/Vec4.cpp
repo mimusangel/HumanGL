@@ -23,7 +23,7 @@ namespace mmatrix
 		this->_val[0] = x;
 		this->_val[1] = y;
 		this->_val[2] = z;
-		this->_val[2] = w;
+		this->_val[3] = w;
 	}
 	Vec4::Vec4(const Vec3 &v, float w)
 	{
