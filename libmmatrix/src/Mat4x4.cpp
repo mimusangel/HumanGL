@@ -6,7 +6,7 @@
 /*   By: jrouthie <jrouthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 21:15:11 by jrouthie          #+#    #+#             */
-/*   Updated: 2017/11/20 03:57:56 by jrouthie         ###   ########.fr       */
+/*   Updated: 2017/11/20 04:05:44 by jrouthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ namespace mmatrix
 			for (int y = 0; y < 4; y++)
 				this->_val[x][y] = v[x][y];
 	}
-	Mat4x4	Mat4x4::identity(void)
+	Mat4x4	Mat4x4::Identity(void)
 	{
 		return (Mat4x4((float[4][4]){
 			{1, 0, 0, 0},
@@ -79,7 +79,7 @@ namespace mmatrix
 			{0, 0, 1, 0},
 			{0, 0, 0, 1}}));
 	}
-	Mat4x4	Mat4x4::fromEuler(Vec3 v)
+	Mat4x4	Mat4x4::FromEuler(Vec3 v)
 	{
 		float	t[6];
 
@@ -98,7 +98,7 @@ namespace mmatrix
 			{0, 0, 0, 1}
 		}));
 	}
-	Mat4x4	Mat4x4::frustum(float v[6])
+	Mat4x4	Mat4x4::Frustum(float v[6])
 	{
 		return (Mat4x4((float[4][4]){
 			{2.0f * v[4] / (v[1] - v[0]), 0.0f, 0.0f, 0.0f},
@@ -108,7 +108,7 @@ namespace mmatrix
 			{-2.0f * (v[5] * v[4]) / (v[5] - v[4]), 0.0f, 0.0f, 0.0f}
 		}));
 	}
-	Mat4x4	Mat4x4::lookAt(const Vec3 &eye, Vec3 &center,
+	Mat4x4	Mat4x4::LookAt(const Vec3 &eye, Vec3 &center,
 		const Vec3 &up)
 	{
 		Vec3	f = center - eye;
@@ -124,7 +124,7 @@ namespace mmatrix
 		});
 		return (mat.translate_in_place(Vec3(-eye[0], -eye[1], -eye[2])));
 	}
-	Mat4x4	Mat4x4::ortho(float v[6])
+	Mat4x4	Mat4x4::Ortho(float v[6])
 	{
 		return (Mat4x4((float[4][4]){
 			{2.0f / (v[1] - v[0]), 0.0f, 0.0f, 0.0f},
@@ -134,7 +134,7 @@ namespace mmatrix
 				-(v[5] + v[4]) / (v[5] - v[4]), 1.0f}
 		}));
 	}
-	Mat4x4	Mat4x4::perspective(const float y_fov, const float aspect,
+	Mat4x4	Mat4x4::Perspective(const float y_fov, const float aspect,
 		const float near, const float far)
 	{
 		const float	a = 1.0f / tanf(y_fov / 2.0f);

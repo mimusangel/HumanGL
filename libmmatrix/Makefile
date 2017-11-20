@@ -6,7 +6,7 @@
 #    By: jrouthie <jrouthie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/19 19:12:24 by jrouthie          #+#    #+#              #
-#    Updated: 2017/11/20 02:50:27 by jrouthie         ###   ########.fr        #
+#    Updated: 2017/11/20 04:02:53 by jrouthie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ MAKE = make --no-print-directory
 
 #------------------------------------------------------------------------------#
 
-NAME = mmatrix.a
+NAME = libmmatrix.a
 LIB_NAME =
 LIBS = -lm
 SRC = \
