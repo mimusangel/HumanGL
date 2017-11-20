@@ -29,9 +29,9 @@ int main()
 			{
 				mesh.begin();
 				static const GLfloat g_vertex_buffer_data[] = {
-				   -1.0f, -1.0f, -3.0f,
-				   0.0f,  1.0f, -3.0f,
-				   1.0f, -1.0f, -3.0f,
+				   -1.0f, -1.0f, 3.0f,
+				   0.0f,  1.0f, 3.0f,
+				   1.0f, -1.0f, 3.0f,
 				};
 				mesh.add(0, GL_FLOAT, 3, (void *)g_vertex_buffer_data, 3);
 				mesh.end();

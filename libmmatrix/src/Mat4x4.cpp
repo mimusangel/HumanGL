@@ -130,9 +130,8 @@ namespace mmatrix
 		return (Mat4x4((float[4][4]){
 			{a / aspect, 0.0f, 0.0f, 0.0f},
 			{0.0f, a, 0.0f, 0.0f},
-			{0.0f, 0.0f, -((far + near) / (far - near)),
-				-((2.0f * far * near) / (far - near))},
-			{0.0f, 0.0f, -1.0f, 0.0f}
+			{0.0f, 0.0f, (-near - far) / (near - far), 1.0f},
+			{0.0f, 0.0f, 2.0f * far * near / (near - far), 0.0f}
 		}));
 	}
 	Vec4			&Mat4x4::operator[](const int i)
