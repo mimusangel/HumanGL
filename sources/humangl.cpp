@@ -48,6 +48,8 @@ int main()
 			head.setParent(&body);
 			Cube leftArmUp(Vec3(0.125f + 0.0625f, -0.1875f, 0.f), Vec3(), Vec3(0, -0.1666666667, 0.f), Vec3(0.1249f, 0.1875f, 0.1249f));
 			leftArmUp.setParent(&body);
+			Cube leftLegUp(Vec3(0.125f, 0.f, 0.f), Vec3(), Vec3(0, -0.1666666667, 0.f), Vec3(0.1249f, -0.1875f, 0.1249f));
+			leftLegUp.setParent(&body);
 
 			/*
 			0.1875f  =  1.5f       1.25  = 0.15625f
@@ -116,6 +118,9 @@ int main()
 				sample.uniformMat4((GLchar *)"model", (GLfloat *)&model);
 				Cube::Render();
 				model = leftArmUp.toMatrix();
+				sample.uniformMat4((GLchar *)"model", (GLfloat *)&model);
+				Cube::Render();
+				model = leftLegUp.toMatrix();
 				sample.uniformMat4((GLchar *)"model", (GLfloat *)&model);
 				Cube::Render();
 
