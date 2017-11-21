@@ -7,4 +7,7 @@
 # include <string>
 # include <mmatrix.hpp>
 
+# ifndef TORADIANS
+#  define TORADIANS(x)	(x * 0.0174533f)
+# endif
 #endif

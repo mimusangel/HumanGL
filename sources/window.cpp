@@ -19,6 +19,10 @@ static void cursor_position_callback(GLFWwindow* window, double xpos, double ypo
 	win = (Window *)glfwGetWindowUserPointer(window);
 	if (!win)
 		return ;
+	win->dirMouse[0] = xpos - win->mouse[0];
+	win->dirMouse[1] = ypos - win->mouse[1];
+	win->mouse[0] = xpos;
+	win->mouse[1] = ypos;
 }
 
 static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
@@ -34,7 +38,7 @@ static void mouse_button_callback(GLFWwindow* window, int button, int action, in
 ** Class Window
 */
 
-Window::Window(int width, int height, std::string title) : _grab(false)
+Window::Window(int width, int height, std::string title) : _grab(false), mouse(0), dirMouse(0)
 {
 	glfwWindowHint(GLFW_SAMPLES, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -94,7 +98,11 @@ void				Window::setGrab(bool grab)
 {
 	_grab = grab;
 	if (_grab)
+	{
 		glfwSetInputMode(_win, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+		dirMouse[0] = mouse[0];
+		dirMouse[1] = mouse[1];
+	}
 	else
 		glfwSetInputMode(_win, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 }
@@ -102,4 +110,9 @@ void				Window::setGrab(bool grab)
 bool				Window::isOpen(void)
 {
 	return (!glfwWindowShouldClose(_win));
+}
+
+GLFWwindow			*Window::getGLFW(void)
+{
+	return (_win);
 }

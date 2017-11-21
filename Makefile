@@ -15,7 +15,8 @@ SRC = \
 	window.cpp \
 	shaders.cpp \
 	mesh.cpp \
-	debug.cpp
+	debug.cpp \
+	transform.cpp
 
 
 
