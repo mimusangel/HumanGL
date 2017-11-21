@@ -125,7 +125,7 @@ namespace mmatrix
 		Mat4x4(const Quat &v);
 		Mat4x4(const Mat4x4 &v);
 		static Mat4x4	Identity(void);
-		static Mat4x4	FromEuler(Vec3 v);
+		static Mat4x4	FromEuler(const Vec3 &v);
 		static Mat4x4	Frustum(float v[6]);
 		static Mat4x4	LookAt(const Vec3 &eye, Vec3 &center,
 			const Vec3 &up);

@@ -67,7 +67,7 @@ namespace mmatrix
 			{0, 0, 1, 0},
 			{0, 0, 0, 1}}));
 	}
-	Mat4x4	Mat4x4::FromEuler(Vec3 v)
+	Mat4x4	Mat4x4::FromEuler(const Vec3 &v)
 	{
 		float	t[6];
 
