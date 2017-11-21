@@ -15,6 +15,7 @@ int main()
 	else
 	{
 		Window win(1280, 720, "HumanGL");
+		glfwFocusWindow(win.getGLFW());
 		if (win.getError().length() > 0)
 			std::cout << win.getError() << endl;
 		else
@@ -56,12 +57,12 @@ int main()
 				mesh.end();
 			}
 			Mat4x4	perspective = Mat4x4::Perspective(70.0f, 1280.0f / 720.0f, 0.1f, 1000.0f);
-			Mat4x4	model;
-			model = Mat4x4::Translate(Vec3(-0.5f, -0.5f, -0.5f));
+			Mat4x4	model = Mat4x4::Identity();
+			model.scale_aniso(Vec3(0.5f, 1.0f, 0.5f));
+			model.translate_in_place(Vec3(-0.5f, -0.5f, -0.5f));
 			glEnable(GL_DEPTH_TEST);
 			glEnable(GL_CULL_FACE);
 			glCullFace(GL_FRONT);
-			Debug::print(model);
 			Debug::print(model);
 			Transform cam;
 

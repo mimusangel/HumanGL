@@ -295,7 +295,7 @@ namespace mmatrix
 				this->_val[x][y] *= v;
 		return (*this);
 	}
-	Mat4x4			&Mat4x4::scale_aniso(const float v[3])
+	Mat4x4			&Mat4x4::scale_aniso(const Vec3 &v)
 	{
 		for (int x = 0; x < 3; x++)
 			for (int y = 0; y < 4; y++)

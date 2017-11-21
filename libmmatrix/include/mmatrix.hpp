@@ -149,7 +149,7 @@ namespace mmatrix
 		float			dot(const Mat4x4 &v);
 		float			length(void);
 		Mat4x4			&scale(const float v);
-		Mat4x4			&scale_aniso(const float v[3]);
+		Mat4x4			&scale_aniso(const Vec3 &v);
 		Mat4x4			&rotate(const Vec3 &up, const float angle);
 		Mat4x4			&rotate_x(const float angle);
 		Mat4x4			&rotate_y(const float angle);
