@@ -1,10 +1,10 @@
 #include <iostream>
 using namespace std;
 
-#include <mmatrix.hpp>
 #include "window.hpp"
 #include "shaders.hpp"
 #include "mesh.hpp"
+#include "debug.hpp"
 
 int main()
 {
@@ -48,30 +48,20 @@ int main()
 				0.0f, 0.0f, 1.0f, 0.0f,
 				0.0f, 0.0f, 0.0f, 1.0f
 			};*/
-			{
-			const float	*a = (float*)&model;
-			int	i = 0;
-			printf("mat : %f %f %f %f\n%f %f %f %f\n%f %f %f %f\n%f %f %f %f\n\n",
-				a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++]);
-			}
+			Debug::print(model);
 			// model.translate_in_place(mmatrix::Vec3(1, 0.2, 0.3));
 			// model.set_translate(mmatrix::Vec3(0, 0, -1));
 			// model = model.translate(mmatrix::Vec3(0, 0, -1));
 			// model.rotate_x(0.1f);
 			// model.rotate(mmatrix::Vec3(0, 1, 0), 0.1f);
 			// model[3][3] = 1;
-			{
-			const float	*a = (float*)&model;
-			int	i = 0;
-			printf("mat : %f %f %f %f\n%f %f %f %f\n%f %f %f %f\n%f %f %f %f\n\n",
-				a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++],a[i++]);
-			}
+			Debug::print(model);
 			while (win.isOpen())
 			{
-				model.rotate_x(0.01f);
+				// model.rotate_x(0.01f);
+				win.makeContextCurrent();
 				glClearColor(0.5, 0.5, 0.5, 1);
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-				win.makeContextCurrent();
 				sample.bind();
 				sample.uniformMat4((GLchar *)"projection", (GLfloat *)&perspective);
 				sample.uniformMat4((GLchar *)"model", (GLfloat *)&model);

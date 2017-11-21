@@ -14,7 +14,8 @@ SRC = \
 	humangl.cpp \
 	window.cpp \
 	shaders.cpp \
-	mesh.cpp
+	mesh.cpp \
+	debug.cpp
 
 
 
