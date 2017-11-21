@@ -27,7 +27,7 @@ int main()
 				return (0);
 			if (!sample.build())
 				return (0);
-			Mesh mesh(1);
+			Mesh mesh(2);
 			if (mesh.isCreated())
 			{
 				mesh.begin();
@@ -53,7 +53,22 @@ int main()
 					0, 0, 1, 0, 0, 0, 1, 0, 1,
 					1, 0, 0, 1, 0, 1, 0, 0, 0
 				};
+				static const GLfloat g_color_buffer_data[] = {
+					0, 0, 1, 0, 0, 1, 0, 0, 1,
+					0, 1, 0, 0, 1, 0, 0, 1, 0,
+					0, 1, 1, 0, 1, 1, 0, 1, 1,
+					1, 0, 0, 1, 0, 0, 1, 0, 0,
+					1, 0, 1, 1, 0, 1, 1, 0, 1,
+					1, 1, 0, 1, 1, 0, 1, 1, 0,
+					1, 1, 1, 1, 1, 1, 1, 1, 1,
+					0, 0, 1, 0, 0, 1, 0, 0, 1,
+					0, 1, 0, 0, 1, 0, 0, 1, 0,
+					0, 1, 1, 0, 1, 1, 0, 1, 1,
+					1, 0, 0, 1, 0, 0, 1, 0, 0,
+					1, 0, 1, 1, 0, 1, 1, 0, 1
+				};
 				mesh.add(0, GL_FLOAT, 3, (void *)g_vertex_buffer_data, 36);
+				mesh.add(1, GL_FLOAT, 3, (void *)g_color_buffer_data, 36);
 				mesh.end();
 			}
 			//head		Vec3(0.25f, 0.25f, 0.25f);
