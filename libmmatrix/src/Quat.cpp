@@ -57,9 +57,9 @@ namespace mmatrix
 	{
 		return (Quat(0.0f, 0.0f, 0.0f, 1.0f));
 	}
-	Quat		Quat::Rotate(Vec3 &up, const float angle)
+	Quat		Quat::Rotate(const Vec3 &up, const float angle)
 	{
-		Vec3	v = up * sinf(angle / 2.0f);
+		Vec3	v = (Vec3)up * sinf(angle / 2.0f);
 
 		return (Quat(v[0], v[1], v[2], cosf(angle / 2.0f)));
 	}
@@ -125,7 +125,7 @@ namespace mmatrix
 		_val[3] -= v[3];
 		return (*this);
 	}
-	Quat			Quat::operator*(Quat &v)
+	Quat			Quat::operator*(const Quat &v)
 	{
 		return (Quat(
 			_val[0] * v[3] + _val[1] * v[2] - _val[2] * v[1] + _val[3] * v[0],
@@ -134,7 +134,7 @@ namespace mmatrix
 			-_val[0] * v[0] - _val[1] * v[1] - _val[2] * v[2] + _val[3] * v[3]
 		));
 	}
-	Quat 			&Quat::operator*=(Quat &v)
+	Quat 			&Quat::operator*=(const Quat &v)
 	{
 		*this = *this * v;
 		return (*this);

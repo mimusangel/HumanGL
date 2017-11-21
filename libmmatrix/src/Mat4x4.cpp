@@ -236,17 +236,17 @@ namespace mmatrix
 		*this = *this * v;
 		return (*this);
 	}
-	Mat4x4			Mat4x4::operator*(Quat &v)
+	Mat4x4			Mat4x4::operator*(const Quat &v)
 	{
 		Mat4x4	mat;
 
-		mat[0] = Vec4(v * _val[0].xyz(), 0);
-		mat[1] = Vec4(v * _val[0].xyz(), 0);
-		mat[2] = Vec4(v * _val[0].xyz(), 0);
+		mat[0] = Vec4((Quat)v * _val[0].xyz(), 0);
+		mat[1] = Vec4((Quat)v * _val[0].xyz(), 0);
+		mat[2] = Vec4((Quat)v * _val[0].xyz(), 0);
 		mat[3] = Vec4(0.0f, 0.0f, 0.0f, 1.0f);
 		return (mat);
 	}
-	Mat4x4 			&Mat4x4::operator*=(Quat &v)
+	Mat4x4 			&Mat4x4::operator*=(const Quat &v)
 	{
 		*this = *this * v;
 		return (*this);

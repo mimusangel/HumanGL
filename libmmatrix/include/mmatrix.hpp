@@ -142,8 +142,8 @@ namespace mmatrix
 		Mat4x4 			&operator-=(const Mat4x4 &v);
 		Mat4x4			operator*(const Mat4x4 &v);
 		Mat4x4 			&operator*=(const Mat4x4 &v);
-		Mat4x4			operator*(Quat &v);
-		Mat4x4 			&operator*=(Quat &v);
+		Mat4x4			operator*(const Quat &v);
+		Mat4x4 			&operator*=(const Quat &v);
 		Vec4			row(const int i);
 		float			dot(const Mat4x4 &v);
 		float			length(void);
@@ -167,7 +167,7 @@ namespace mmatrix
 		Quat(float x, float y, float z, float w);
 		Quat(const Mat4x4 &v);
 		static Quat		Identity(void);
-		static Quat		Rotate(Vec3 &up, const float angle);
+		static Quat		Rotate(const Vec3 &up, const float angle);
 		float			&operator[](const int i);
 		const float		&operator[](const int i) const;
 		Quat 			&operator=(const Quat &v);
@@ -176,8 +176,8 @@ namespace mmatrix
 		Quat 			&operator+=(const Quat &v);
 		Quat			operator-(const Quat &v);
 		Quat 			&operator-=(const Quat &v);
-		Quat			operator*(Quat &v);
-		Quat 			&operator*=(Quat &v);
+		Quat			operator*(const Quat &v);
+		Quat 			&operator*=(const Quat &v);
 		Vec3			operator*(const Vec3 &v);
 		float			mulInner(const Quat &v);
 		Quat			&scale(const float v);

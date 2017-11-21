@@ -10,13 +10,13 @@ Transform	&Transform::setParent(Transform *parent)
 	return (*this);
 }
 
-Transform	&Transform::rotate(Vec3 &axis, float angle)
+Transform	&Transform::rotate(const Vec3 &axis, float angle)
 {
 	_rotate = Quat::Rotate(axis, TORADIANS(angle)) * _rotate;
 	return (*this);
 }
 
-Transform	&Transform::translate(Vec3 &value)
+Transform	&Transform::translate(const Vec3 &value)
 {
 	_position += value;
 	return (*this);

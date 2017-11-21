@@ -30,12 +30,30 @@ int main()
 			if (mesh.isCreated())
 			{
 				mesh.begin();
+				// static const GLfloat g_vertex_buffer_data[] = {
+				//    -1.0f, -1.0f, 0.0f,
+				//    0.0f,  1.0f, 0.0f,
+				//    1.0f, -1.0f, 0.0f,
+				// };
+				// mesh.add(0, GL_FLOAT, 3, (void *)g_vertex_buffer_data, 3);
+				// mesh.end();
+
 				static const GLfloat g_vertex_buffer_data[] = {
-				   -1.0f, -1.0f, 0.0f,
-				   0.0f,  1.0f, 0.0f,
-				   1.0f, -1.0f, 0.0f,
+				// float	box[108] = {
+					0, 1, 0, 1, 1, 0, 0, 0, 0,
+					1, 0, 0, 0, 0, 0, 1, 1, 0,
+					0, 1, 1, 0, 0, 1, 1, 1, 1,
+					1, 0, 1, 1, 1, 1, 0, 0, 1,
+					0, 1, 0, 0, 0, 0, 0, 1, 1,
+					0, 0, 1, 0, 1, 1, 0, 0, 0,
+					1, 1, 0, 1, 1, 1, 1, 0, 0,
+					1, 0, 1, 1, 0, 0, 1, 1, 1,
+					0, 1, 1, 1, 1, 1, 0, 1, 0,
+					1, 1, 0, 0, 1, 0, 1, 1, 1,
+					0, 0, 1, 0, 0, 0, 1, 0, 1,
+					1, 0, 0, 1, 0, 1, 0, 0, 0
 				};
-				mesh.add(0, GL_FLOAT, 3, (void *)g_vertex_buffer_data, 3);
+				mesh.add(0, GL_FLOAT, 3, (void *)g_vertex_buffer_data, 36);
 				mesh.end();
 			}
 			Mat4x4 perspective = Mat4x4::Perspective(70.0f, 1280.0f / 720.0f, 0.1f, 1000.0f);
@@ -47,6 +65,9 @@ int main()
 			Debug::print(model);
 			Debug::print(model);
 			Transform cam;
+
+			// cam.translate_in_place(Vec3(0, 0, -1));
+			cam.translate(Vec3(0, 0, -2));
 			Vec3 right(1, 0, 0);
 			Vec3 up(0, 1, 0);
 			while (win.isOpen())
