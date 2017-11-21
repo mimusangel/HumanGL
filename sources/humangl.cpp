@@ -46,12 +46,17 @@ int main()
 			Cube body(Vec3(0, 0.375f, 0), Vec3(), Vec3(0.0f, 0.5f, 0.0f), Vec3(0.25f, 0.375f, 0.125f));
 			Cube head(Vec3(0, -0.125f, 0), Vec3(), Vec3(0.0f, 0.5f, 0.0f), Vec3(0.25f));
 			head.setParent(&body);
-			Cube leftArmUp(Vec3(0.125f + 0.0625f, -0.125f - 0.03125f, 0.f), Vec3(), Vec3(0, -0.333f, 0.f), Vec3(0.125f, 0.1875f, 0.125f));
+			Cube leftArmUp(Vec3(0.125f + 0.0625f, -0.1875f, 0.f), Vec3(), Vec3(0, -0.1666666667, 0.f), Vec3(0.1249f, 0.1875f, 0.1249f));
 			leftArmUp.setParent(&body);
 
 			/*
 			0.1875f  =  1.5f       1.25  = 0.15625f
 			0.125f      1.f
+
+			 0.125 * 0.5 / (0.1875 / 2)
+
+
+
 
 			*/
 
@@ -73,7 +78,8 @@ int main()
 				/* * UPDATE           * */
 				/* ******************** */
 				rot[1] += 0.01f;
-				rot2[2] = TORADIANS(90);
+				rot2[2] += 0.01f;
+				// rot2[2] = TORADIANS(90);
 				head.setRotate(rot);
 				leftArmUp.setRotate(rot2);
 				cam.move();
