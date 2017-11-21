@@ -164,6 +164,10 @@ namespace mmatrix
 			this->_val[2] == v[2] &&
 			this->_val[3] == v[3]);
 	}
+	bool 			Mat4x4::operator!=(const Mat4x4 &v)
+	{
+		return (!(*this == v));
+	}
 	Mat4x4			Mat4x4::operator+(const Mat4x4 &v)
 	{
 		return (Mat4x4((float[4][4]){

@@ -43,6 +43,10 @@ namespace mmatrix
 			this->_val[0] == v[0] &&
 			this->_val[1] == v[1]);
 	}
+	bool 		Vec2::operator!=(const Vec2 &v)
+	{
+		return (!(*this == v));
+	}
 	Vec2		Vec2::operator+(const Vec2 &v)
 	{
 		return (Vec2(this->_val[0] + v[0], this->_val[1] + v[1]));

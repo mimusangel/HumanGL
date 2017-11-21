@@ -30,33 +30,6 @@ void		cam_move(Window &win, Transform &c)
 		pos *= 0.01f;
 	c.translate(pos);
 }
-#define SMOOTH_DEPTH 3
-Vec2	mouse_smooth(const Vec2 &v)
-{
-	static int		c;
-	static Vec2		buf[SMOOTH_DEPTH];
-	Vec2			t;
-
-	buf[c++] = v;
-	if (c == SMOOTH_DEPTH)
-		c = 0;
-	for (int i = 0; i < SMOOTH_DEPTH; i++)
-		t += buf[i];
-	return (t /= SMOOTH_DEPTH);
-}
-
-Vec2		get_mouse(Window &win)
-{
-	double			x, y;
-	static double	ox, oy;
-	Vec2			pp;
-
-	glfwGetCursorPos(win.getGLFW(), &x, &y);
-	pp = Vec2(x - ox, y - oy);
-	ox = x;
-	oy = y;
-	return (mouse_smooth(pp));
-}
 
 int main()
 {
@@ -154,30 +127,23 @@ int main()
 			cam.translate(Vec3(0, 0, 2));
 			Vec3 right(1, 0, 0);
 			Vec3 up(0, 1, 0);
-			get_mouse(win);
 			while (win.isOpen())
 			{
 				/* ******************** */
 				/* * UPDATE           * */
 				/* ******************** */
-				Vec2	mouse = get_mouse(win);
-				// if (win.isGrabbed())
-				if (glfwGetMouseButton(win.getGLFW(), GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
+				if (glfwGetMouseButton(win.getGLFW(), GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS ||
+					win.isGrabbed())
 				{
-					// if (glfwGetKey(win.getGLFW(), GLFW_KEY_ESCAPE) == GLFW_PRESS)
-					// 	win.setGrab(false);
-					// if (win.dirMouse[0] != 0.0f || win.dirMouse[0] != 0.0f)
-					if (!(mouse == Vec2(0)))
+					if (win.dirMouseSmooth != Vec2(0))
 					{
 						static Vec2	euler;
-						euler += mouse;
-;
+						euler += win.dirMouseSmooth;
+						win.dirMouseSmooth = Vec2(0);
 						cam.setRotate(Vec3(TORADIANS(euler), 0));
 						// cam.rotate(up, TORADIANS(win.dirMouse[0]));
 						// cam.rotate(right, TORADIANS(win.dirMouse[1]));
 					}
-					win.dirMouse[0] = 0;
-					win.dirMouse[1] = 0;
 					// Debug::print(win.dirMouse);
 				}
 				cam_move(win, cam);

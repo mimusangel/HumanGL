@@ -92,6 +92,10 @@ namespace mmatrix
 			_val[2] == v[2] +
 			_val[3] == v[3]);
 	}
+	bool 			Quat::operator!=(const Quat &v)
+	{
+		return (!(*this == v));
+	}
 	Quat			Quat::operator+(const Quat &v)
 	{
 		return (Quat(

@@ -20,6 +20,7 @@ namespace mmatrix
 		const float	&operator[](const int i) const;
 		Vec2 		&operator=(const Vec2 &v);
 		bool 		operator==(const Vec2 &v);
+		bool 		operator!=(const Vec2 &v);
 		Vec2		operator+(const Vec2 &v);
 		Vec2 		&operator+=(const Vec2 &v);
 		Vec2		operator-(const Vec2 &v);
@@ -54,6 +55,7 @@ namespace mmatrix
 		const float	&operator[](const int i) const;
 		Vec3 		&operator=(const Vec3 &v);
 		bool 		operator==(const Vec3 &v);
+		bool 		operator!=(const Vec3 &v);
 		Vec3		operator+(const Vec3 &v);
 		Vec3 		&operator+=(const Vec3 &v);
 		Vec3		operator-(const Vec3 &v);
@@ -91,6 +93,7 @@ namespace mmatrix
 		const float	&operator[](const int i) const;
 		Vec4 		&operator=(const Vec4 &v);
 		bool 		operator==(const Vec4 &v);
+		bool 		operator!=(const Vec4 &v);
 		Vec4		operator+(const Vec4 &v);
 		Vec4 		&operator+=(const Vec4 &v);
 		Vec4		operator-(const Vec4 &v);
@@ -137,6 +140,7 @@ namespace mmatrix
 		const Vec4		&operator[](const int i) const;
 		Mat4x4 			&operator=(const Mat4x4 &v);
 		bool 			operator==(const Mat4x4 &v);
+		bool 			operator!=(const Mat4x4 &v);
 		Mat4x4			operator+(const Mat4x4 &v);
 		Mat4x4 			&operator+=(const Mat4x4 &v);
 		Mat4x4			operator-(const Mat4x4 &v);
@@ -173,6 +177,7 @@ namespace mmatrix
 		const float		&operator[](const int i) const;
 		Quat 			&operator=(const Quat &v);
 		bool 			operator==(const Quat &v);
+		bool 			operator!=(const Quat &v);
 		Quat			operator+(const Quat &v);
 		Quat 			&operator+=(const Quat &v);
 		Quat			operator-(const Quat &v);

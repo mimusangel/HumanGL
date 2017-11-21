@@ -1,4 +1,6 @@
 #include "window.hpp"
+#include "debug.hpp"
+#define SMOOTH_DEPTH 3
 
 /*
 ** Static function Callback
@@ -10,6 +12,20 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 	win = (Window *)glfwGetWindowUserPointer(window);
 	if (!win)
 		return ;
+	if (action == GLFW_PRESS)
+	{
+		if (key == GLFW_KEY_ESCAPE)
+		{
+			if (win->isGrabbed())
+				win->setGrab(false);
+			else
+				win->close();
+		}
+		else if (key == GLFW_KEY_SPACE)
+		{
+			win->setGrab(true);
+		}
+	}
 }
 
 static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
@@ -78,15 +94,37 @@ void				Window::makeContextCurrent(void)
 	glfwMakeContextCurrent(_win);
 }
 
+mmatrix::Vec2	mouse_smooth(const mmatrix::Vec2 &v)
+{
+	static int		c;
+	static mmatrix::Vec2		buf[SMOOTH_DEPTH];
+	mmatrix::Vec2			t;
+
+	buf[c++] = v;
+	if (c == SMOOTH_DEPTH)
+		c = 0;
+	for (int i = 0; i < SMOOTH_DEPTH; i++)
+		t += buf[i];
+	return (t /= SMOOTH_DEPTH);
+}
+
 void				Window::update(void)
 {
+	dirMouse = Vec2(0);
+	dirMouseSmooth = Vec2(0);
 	glfwSwapBuffers(_win);
 	glfwPollEvents();
+	dirMouseSmooth = mouse_smooth(dirMouse);
 }
 
 void				Window::setTitle(std::string title)
 {
 	glfwSetWindowTitle(_win, title.c_str());
+}
+
+void				Window::close(void)
+{
+	glfwSetWindowShouldClose(_win, GLFW_TRUE);
 }
 
 bool				Window::isGrabbed(void)
@@ -100,8 +138,8 @@ void				Window::setGrab(bool grab)
 	if (_grab)
 	{
 		glfwSetInputMode(_win, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-		dirMouse[0] = mouse[0];
-		dirMouse[1] = mouse[1];
+		dirMouse[0] = 0;
+		dirMouse[1] = 0;
 	}
 	else
 		glfwSetInputMode(_win, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
