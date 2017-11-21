@@ -14,7 +14,7 @@ public:
 	static void		Unload(void);
 	static void		Render(void);
 
-private:
+// private:
 	Vec3	_position;
 	Vec3	_rotate;
 	Vec3	_offset;
@@ -24,7 +24,7 @@ private:
 public:
 	Cube(const Vec3 &pos = Vec3(), const Vec3 &rot = Vec3(), const Vec3 &offset = Vec3(), const Vec3 &scale = Vec3(1.f));
 	Cube	&setParent(Cube *parent);
-	Mat4x4	toMatrix(bool byChild = false);
+	Mat4x4	toMatrix(const bool isChild = false);
 	Cube	&setRotate(const Vec3 &rot);
 };
 

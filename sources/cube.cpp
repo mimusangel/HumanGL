@@ -1,4 +1,9 @@
 #include "cube.hpp"
+#include "mmatrix.hpp"
+
+#include "debug.hpp"
+
+using namespace mmatrix;
 
 Mesh		*Cube::mesh = nullptr;
 
@@ -64,20 +69,29 @@ Cube	&Cube::setParent(Cube *parent)
 	return (*this);
 }
 
-Mat4x4	Cube::toMatrix(bool byChild)
+Mat4x4	Cube::toMatrix(const bool isChild)
 {
-	Mat4x4 parentMatrix;
-	Mat4x4	matrix = Mat4x4::Translate(_position);
+	Mat4x4	parentMatrix;
+	Mat4x4	matrix;
+
+	if (_parent != nullptr)
+	{
+		parentMatrix = _parent->toMatrix(true);
+		matrix = Mat4x4::Translate(_position * _parent->_scale);
+	}
+	else
+	{
+		parentMatrix = Mat4x4::Identity();
+		matrix = Mat4x4::Translate(_position);
+	}
 	matrix.rotate(Vec3(0, 0, 1), _rotate[2]);
 	matrix.rotate(Vec3(0, 1, 0), _rotate[1]);
 	matrix.rotate(Vec3(1, 0, 0), _rotate[0]);
-	if (!byChild)
+	if (!isChild)
+	{
 		matrix.scale_aniso(_scale);
-	matrix.translate_in_place(_offset);
-	if (_parent != nullptr)
-		parentMatrix = _parent->toMatrix(true);
-	else
-		parentMatrix = Mat4x4::Identity();
+		matrix.translate_in_place(_offset);
+	}
 	return (parentMatrix * matrix);
 }
 
