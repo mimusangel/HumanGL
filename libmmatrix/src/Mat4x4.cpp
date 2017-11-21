@@ -51,7 +51,7 @@ namespace mmatrix
 		_val[3][0] = 0.0f;
 		_val[3][1] = 0.0f;
 		_val[3][2] = 0.0f;
-		_val[3][3] = 0.0f;
+		_val[3][3] = 1.0f;
 	}
 	Mat4x4::Mat4x4(const Mat4x4 &v)
 	{
