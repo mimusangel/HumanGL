@@ -36,11 +36,12 @@ D_FILE = $(addprefix dep/, $(SRC:.cpp=.d))
 CFLAGS += -I include $(addprefix -I lib, $(addsuffix /include, $(LIB_NAME)))
 LIB_DIR = $(addprefix lib, $(LIB_NAME))
 LIBS += $(addprefix -L , $(LIB_DIR)) $(addprefix -l, $(LIB_NAME))
-.PHONY: all dircreate clean fclean ffclean run ar re req
+.PHONY: all dircreate clean fclean ffclean run ar re req relink
 
 all: dircreate $(join $(addsuffix /, $(LIB_DIR)), $(addsuffix .a, $(LIB_DIR)))
 	$(MAKE) $(NAME)
-%.a:
+relink:
+%.a: relink
 	$(MAKE) -C $(dir $@)
 
 dircreate:

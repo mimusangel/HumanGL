@@ -99,7 +99,6 @@ int main()
 			//other		Vec3(0.125f, 0.375f, 0.125f);
 			//other		Vec3(0.125f, 0.1875f, 0.125f);
 
-			// Mat4x4	perspective = Mat4x4::Perspective(70.0f, 1280.0f / 720.0f, 0.1f, 1000.0f);
 			Mat4x4	model_head = Mat4x4::Translate(Vec3(0, 0.750f, 0));
 			model_head.scale_aniso(Vec3(0.25f, 0.25f, 0.25f));
 			model_head.translate_in_place(Vec3(-0.5f, 0.0f, -0.5f));
