@@ -39,7 +39,6 @@ int main()
 				// mesh.end();
 
 				static const GLfloat g_vertex_buffer_data[] = {
-				// float	box[108] = {
 					0, 1, 0, 1, 1, 0, 0, 0, 0,
 					1, 0, 0, 0, 0, 0, 1, 1, 0,
 					0, 1, 1, 0, 0, 1, 1, 1, 1,
@@ -58,7 +57,8 @@ int main()
 			}
 			Mat4x4 perspective = Mat4x4::Perspective(70.0f, 1280.0f / 720.0f, 0.1f, 1000.0f);
 			Mat4x4 model;
-			model = model.translate(Vec3(0, 0, 3));
+			model = model.translate(Vec3(-0.5f, -0.5f, -0.5f));
+			// model = model.translate(Vec3(0, 0, 0));
 			glEnable(GL_DEPTH_TEST);
 			glEnable(GL_CULL_FACE);
 			glCullFace(GL_FRONT);
@@ -66,8 +66,7 @@ int main()
 			Debug::print(model);
 			Transform cam;
 
-			// cam.translate_in_place(Vec3(0, 0, -1));
-			cam.translate(Vec3(0, 0, -2));
+			cam.translate(Vec3(0, 0, 2));
 			Vec3 right(1, 0, 0);
 			Vec3 up(0, 1, 0);
 			while (win.isOpen())
