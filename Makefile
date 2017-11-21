@@ -17,7 +17,8 @@ SRC = \
 	mesh.cpp \
 	debug.cpp \
 	transform.cpp \
-	camera.cpp
+	camera.cpp \
+	cube.cpp
 
 
 

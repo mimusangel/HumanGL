@@ -7,6 +7,7 @@ using namespace std;
 #include "debug.hpp"
 #include "transform.hpp"
 #include "camera.hpp"
+#include "cube.hpp"
 using namespace mmatrix;
 
 int main()
@@ -28,73 +29,35 @@ int main()
 				return (0);
 			if (!sample.build())
 				return (0);
-			Mesh mesh(2);
-			if (mesh.isCreated())
-			{
-				mesh.begin();
-				// static const GLfloat g_vertex_buffer_data[] = {
-				//    -1.0f, -1.0f, 0.0f,
-				//    0.0f,  1.0f, 0.0f,
-				//    1.0f, -1.0f, 0.0f,
-				// };
-				// mesh.add(0, GL_FLOAT, 3, (void *)g_vertex_buffer_data, 3);
-				// mesh.end();
+			Cube::Load();
 
-				static const GLfloat g_vertex_buffer_data[] = {
-					-0.5f, 0.5f, -0.5f, 0.5f, 0.5f, -0.5f, -0.5f, -0.5f, -0.5f,
-					0.5f, -0.5f, -0.5f, -0.5f, -0.5f, -0.5f, 0.5f, 0.5f, -0.5f,
-					-0.5f, 0.5f, 0.5f, -0.5f, -0.5f, 0.5f, 0.5f, 0.5f, 0.5f,
-					0.5f, -0.5f, 0.5f, 0.5f, 0.5f, 0.5f, -0.5f, -0.5f, 0.5f,
-					-0.5f, 0.5f, -0.5f, -0.5f, -0.5f, -0.5f, -0.5f, 0.5f, 0.5f,
-					-0.5f, -0.5f, 0.5f, -0.5f, 0.5f, 0.5f, -0.5f, -0.5f, -0.5f,
-					0.5f, 0.5f, -0.5f, 0.5f, 0.5f, 0.5f, 0.5f, -0.5f, -0.5f,
-					0.5f, -0.5f, 0.5f, 0.5f, -0.5f, -0.5f, 0.5f, 0.5f, 0.5f,
-					-0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, -0.5f, 0.5f, -0.5f,
-					0.5f, 0.5f, -0.5f, -0.5f, 0.5f, -0.5f, 0.5f, 0.5f, 0.5f,
-					-0.5f, -0.5f, 0.5f, -0.5f, -0.5f, -0.5f, 0.5f, -0.5f, 0.5f,
-					0.5f, -0.5f, -0.5f, 0.5f, -0.5f, 0.5f, -0.5f, -0.5f, -0.5f
-				};
-				static const GLfloat g_color_buffer_data[] = {
-					0, 0, 1, 0, 0, 1, 0, 0, 1,
-					0, 1, 0, 0, 1, 0, 0, 1, 0,
-					0, 1, 1, 0, 1, 1, 0, 1, 1,
-					1, 0, 0, 1, 0, 0, 1, 0, 0,
-					1, 0, 1, 1, 0, 1, 1, 0, 1,
-					1, 1, 0, 1, 1, 0, 1, 1, 0,
-					1, 1, 1, 1, 1, 1, 1, 1, 1,
-					0, 0, 1, 0, 0, 1, 0, 0, 1,
-					0, 1, 0, 0, 1, 0, 0, 1, 0,
-					0, 1, 1, 0, 1, 1, 0, 1, 1,
-					1, 0, 0, 1, 0, 0, 1, 0, 0,
-					1, 0, 1, 1, 0, 1, 1, 0, 1
-				};
-				mesh.add(0, GL_FLOAT, 3, (void *)g_vertex_buffer_data, 36);
-				mesh.add(1, GL_FLOAT, 3, (void *)g_color_buffer_data, 36);
-				mesh.end();
-			}
-			//head		Vec3(0.25f, 0.25f, 0.25f);
-			//body		Vec3(0.25f, 0.375f, 0.125f);
-			//other		Vec3(0.125f, 0.375f, 0.125f);
-			//other		Vec3(0.125f, 0.1875f, 0.125f);
+			// Mat4x4	model_right_leg = Mat4x4::Translate(Vec3(0.0625f, 0.375f, 0));
+			// model_right_leg.scale_aniso(Vec3(0.125f, 0.375f, 0.125f));
+			// model_right_leg.translate_in_place(Vec3(0.0f, -0.5f, 0.0f));
+			// Mat4x4	model_left_leg = Mat4x4::Translate(Vec3(-0.0625f, 0.375f, 0));
+			// model_left_leg.scale_aniso(Vec3(0.125f, 0.375f, 0.125f));
+			// model_left_leg.translate_in_place(Vec3(0.0f, -0.5f, 0.0f));
+			// Mat4x4	model_right_arm = Mat4x4::Translate(Vec3(-0.1875f, 0.750f, 0));
+			// model_right_arm.scale_aniso(Vec3(0.125f, 0.375f, 0.125f));
+			// model_right_arm.translate_in_place(Vec3(0.0f, -0.5f, 0.0f));
+			// Mat4x4	model_left_arm = Mat4x4::Translate(Vec3(0.1875f, 0.750f, 0));
+			// model_left_arm.scale_aniso(Vec3(0.125f, 0.375f, 0.125f));
+			// model_left_arm.translate_in_place(Vec3(0.0f, -0.5f, 0.0f));
+			Cube body(Vec3(0, 0.375f, 0), Vec3(), Vec3(0.0f, 0.5f, 0.0f), Vec3(0.25f, 0.375f, 0.125f));
+			Cube head(Vec3(0, -0.125f, 0), Vec3(), Vec3(0.0f, 0.5f, 0.0f), Vec3(0.25f));
+			head.setParent(&body);
+			Cube leftArmUp(Vec3(0.125f + 0.0625f, -0.125f - 0.03125f, 0.f), Vec3(), Vec3(0, -0.333f, 0.f), Vec3(0.125f, 0.1875f, 0.125f));
+			leftArmUp.setParent(&body);
 
-			Mat4x4	model_head = Mat4x4::Translate(Vec3(0, 0.750f, 0));
-			model_head.scale_aniso(Vec3(0.25f, 0.25f, 0.25f));
-			model_head.translate_in_place(Vec3(0.0f, 0.5f, 0.0f));
-			Mat4x4	model_body = Mat4x4::Translate(Vec3(0, 0.375f, 0));
-			model_body.scale_aniso(Vec3(0.25f, 0.375f, 0.125f));
-			model_body.translate_in_place(Vec3(0.0f, 0.5f, 0.0f));
-			Mat4x4	model_right_leg = Mat4x4::Translate(Vec3(0.0625f, 0.375f, 0));
-			model_right_leg.scale_aniso(Vec3(0.125f, 0.375f, 0.125f));
-			model_right_leg.translate_in_place(Vec3(0.0f, -0.5f, 0.0f));
-			Mat4x4	model_left_leg = Mat4x4::Translate(Vec3(-0.0625f, 0.375f, 0));
-			model_left_leg.scale_aniso(Vec3(0.125f, 0.375f, 0.125f));
-			model_left_leg.translate_in_place(Vec3(0.0f, -0.5f, 0.0f));
-			Mat4x4	model_right_arm = Mat4x4::Translate(Vec3(-0.1875f, 0.750f, 0));
-			model_right_arm.scale_aniso(Vec3(0.125f, 0.375f, 0.125f));
-			model_right_arm.translate_in_place(Vec3(0.0f, -0.5f, 0.0f));
-			Mat4x4	model_left_arm = Mat4x4::Translate(Vec3(0.1875f, 0.750f, 0));
-			model_left_arm.scale_aniso(Vec3(0.125f, 0.375f, 0.125f));
-			model_left_arm.translate_in_place(Vec3(0.0f, -0.5f, 0.0f));
+			/*
+			0.1875f  =  1.5f       1.25  = 0.15625f
+			0.125f      1.f
+
+			*/
+
+			Vec3	rot;
+			Vec3	rot2;
+
 			glEnable(GL_DEPTH_TEST);
 			glEnable(GL_CULL_FACE);
 			glCullFace(GL_FRONT);
@@ -109,6 +72,10 @@ int main()
 				/* ******************** */
 				/* * UPDATE           * */
 				/* ******************** */
+				rot[1] += 0.01f;
+				rot2[2] = TORADIANS(90);
+				head.setRotate(rot);
+				leftArmUp.setRotate(rot2);
 				cam.move();
 				if (glfwGetMouseButton(win.getGLFW(), GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS ||
 					win.isGrabbed())
@@ -136,21 +103,32 @@ int main()
 				Mat4x4 viewMat = cam.toMatrix();
 				// Debug::print(viewMat);
 				sample.uniformMat4((GLchar *)"view", (GLfloat *)&viewMat);
-				sample.uniformMat4((GLchar *)"model", (GLfloat *)&model_body);
-				mesh.render(GL_TRIANGLES);
-				sample.uniformMat4((GLchar *)"model", (GLfloat *)&model_head);
-				mesh.render(GL_TRIANGLES);
-				sample.uniformMat4((GLchar *)"model", (GLfloat *)&model_right_leg);
-				mesh.render(GL_TRIANGLES);
-				sample.uniformMat4((GLchar *)"model", (GLfloat *)&model_left_leg);
-				mesh.render(GL_TRIANGLES);
-				sample.uniformMat4((GLchar *)"model", (GLfloat *)&model_right_arm);
-				mesh.render(GL_TRIANGLES);
-				sample.uniformMat4((GLchar *)"model", (GLfloat *)&model_left_arm);
-				mesh.render(GL_TRIANGLES);
+				Mat4x4 model = body.toMatrix();
+				sample.uniformMat4((GLchar *)"model", (GLfloat *)&model);
+				Cube::Render();
+				model = head.toMatrix();
+				sample.uniformMat4((GLchar *)"model", (GLfloat *)&model);
+				Cube::Render();
+				model = leftArmUp.toMatrix();
+				sample.uniformMat4((GLchar *)"model", (GLfloat *)&model);
+				Cube::Render();
+
+				// sample.uniformMat4((GLchar *)"model", (GLfloat *)&model_body);
+				// Cube::Render();
+				// sample.uniformMat4((GLchar *)"model", (GLfloat *)&model_head);
+				// Cube::Render();
+				// sample.uniformMat4((GLchar *)"model", (GLfloat *)&model_right_leg);
+				// Cube::Render();
+				// sample.uniformMat4((GLchar *)"model", (GLfloat *)&model_left_leg);
+				// Cube::Render();
+				// sample.uniformMat4((GLchar *)"model", (GLfloat *)&model_right_arm);
+				// Cube::Render();
+				// sample.uniformMat4((GLchar *)"model", (GLfloat *)&model_left_arm);
+				// Cube::Render();
 				win.update();
 			} // GL_LINE_STRIP
 		}
 	}
+	Cube::Unload();
 	return (0);
 }
