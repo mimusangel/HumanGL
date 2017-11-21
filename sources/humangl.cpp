@@ -56,7 +56,6 @@ Vec2		get_mouse(Window &win)
 	ox = x;
 	oy = y;
 	return (mouse_smooth(pp));
-	// return (pp);
 }
 
 int main()
@@ -128,7 +127,7 @@ int main()
 			//other		Vec3(0.125f, 0.1875f, 0.125f);
 
 			Mat4x4	perspective = Mat4x4::Perspective(70.0f, 1280.0f / 720.0f, 0.1f, 1000.0f);
-			Mat4x4	model_head = Mat4x4::Translate(Vec3(0, 0.375f * 2, 0));
+			Mat4x4	model_head = Mat4x4::Translate(Vec3(0, 0.750f, 0));
 			model_head.scale_aniso(Vec3(0.25f, 0.25f, 0.25f));
 			model_head.translate_in_place(Vec3(-0.5f, 0.0f, -0.5f));
 			Mat4x4	model_body = Mat4x4::Translate(Vec3(0, 0.375f, 0));
@@ -137,6 +136,15 @@ int main()
 			Mat4x4	model_right_leg = Mat4x4::Translate(Vec3(0.0625f, 0.375f, 0));
 			model_right_leg.scale_aniso(Vec3(0.125f, 0.375f, 0.125f));
 			model_right_leg.translate_in_place(Vec3(-0.5f, -1.0f, -0.5f));
+			Mat4x4	model_left_leg = Mat4x4::Translate(Vec3(-0.0625f, 0.375f, 0));
+			model_left_leg.scale_aniso(Vec3(0.125f, 0.375f, 0.125f));
+			model_left_leg.translate_in_place(Vec3(-0.5f, -1.0f, -0.5f));
+			Mat4x4	model_right_arm = Mat4x4::Translate(Vec3(-0.1875f, 0.750f, 0));
+			model_right_arm.scale_aniso(Vec3(0.125f, 0.375f, 0.125f));
+			model_right_arm.translate_in_place(Vec3(-0.5f, -1.0f, -0.5f));
+			Mat4x4	model_left_arm = Mat4x4::Translate(Vec3(0.1875f, 0.750f, 0));
+			model_left_arm.scale_aniso(Vec3(0.125f, 0.375f, 0.125f));
+			model_left_arm.translate_in_place(Vec3(-0.5f, -1.0f, -0.5f));
 			glEnable(GL_DEPTH_TEST);
 			glEnable(GL_CULL_FACE);
 			glCullFace(GL_FRONT);
@@ -195,6 +203,12 @@ int main()
 				sample.uniformMat4((GLchar *)"model", (GLfloat *)&model_head);
 				mesh.render(GL_TRIANGLES);
 				sample.uniformMat4((GLchar *)"model", (GLfloat *)&model_right_leg);
+				mesh.render(GL_TRIANGLES);
+				sample.uniformMat4((GLchar *)"model", (GLfloat *)&model_left_leg);
+				mesh.render(GL_TRIANGLES);
+				sample.uniformMat4((GLchar *)"model", (GLfloat *)&model_right_arm);
+				mesh.render(GL_TRIANGLES);
+				sample.uniformMat4((GLchar *)"model", (GLfloat *)&model_left_arm);
 				mesh.render(GL_TRIANGLES);
 				win.update();
 			} // GL_LINE_STRIP
