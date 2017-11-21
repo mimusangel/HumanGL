@@ -1,3 +1,5 @@
+#include <cmath>
+#include <cstring>
 #include "transform.hpp"
 using namespace mmatrix;
 
@@ -13,6 +15,11 @@ Transform	&Transform::setParent(Transform *parent)
 Transform	&Transform::rotate(const Vec3 &axis, float angle)
 {
 	_rotate = Quat::Rotate(axis, angle) * _rotate;
+	float magnitude = sqrtf(_rotate[0] * _rotate[0] + _rotate[1] * _rotate[1] + _rotate[2] * _rotate[2] + _rotate[3] * _rotate[3]);
+	_rotate[0] /= magnitude;
+	_rotate[1] /= magnitude;
+	_rotate[2] /= magnitude;
+	_rotate[3] /= magnitude;
 	return (*this);
 }
 
