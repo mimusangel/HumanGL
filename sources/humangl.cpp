@@ -106,11 +106,11 @@ int main()
 						win.setGrab(false);
 					if (win.dirMouse[0] != 0.0f || win.dirMouse[0] != 0.0f)
 					{
-						// static Vec2	euler;
-						// euler += win.dirMouse;
-						// cam.setRotate(Vec3(TORADIANS(euler[1]), TORADIANS(euler[0]), 0));
-						cam.rotate(up, TORADIANS(win.dirMouse[0]));
-						cam.rotate(right, TORADIANS(win.dirMouse[1]));
+						static Vec2	euler;
+						euler += win.dirMouse;
+						cam.setRotate(Vec3(TORADIANS(euler), 0));
+						// cam.rotate(up, TORADIANS(win.dirMouse[0]));
+						// cam.rotate(right, TORADIANS(win.dirMouse[1]));
 					}
 					win.dirMouse[0] = 0;
 					win.dirMouse[1] = 0;
