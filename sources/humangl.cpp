@@ -6,30 +6,8 @@ using namespace std;
 #include "mesh.hpp"
 #include "debug.hpp"
 #include "transform.hpp"
+#include "camera.hpp"
 using namespace mmatrix;
-
-void		cam_move(Window &win, Transform &c)
-{
-	Vec3	pos;
-	if (glfwGetKey(win.getGLFW(), GLFW_KEY_A) == GLFW_PRESS)
-		pos += Vec3(1, 0 ,0);
-	if (glfwGetKey(win.getGLFW(), GLFW_KEY_D) == GLFW_PRESS)
-		pos -= Vec3(1, 0, 0);
-	if (glfwGetKey(win.getGLFW(), GLFW_KEY_Q) == GLFW_PRESS)
-		pos += Vec3(0, 1, 0);
-	if (glfwGetKey(win.getGLFW(), GLFW_KEY_E) == GLFW_PRESS)
-		pos -= Vec3(0, 1, 0);
-	if (glfwGetKey(win.getGLFW(), GLFW_KEY_S) == GLFW_PRESS)
-		pos += Vec3(0, 0, 1);
-	if (glfwGetKey(win.getGLFW(), GLFW_KEY_W) == GLFW_PRESS)
-		pos -= Vec3(0, 0, 1);
-
-	if (glfwGetKey(win.getGLFW(), GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
-		pos *= 0.1f;
-	else
-		pos *= 0.01f;
-	c.translate(pos);
-}
 
 int main()
 {
@@ -121,9 +99,9 @@ int main()
 			glEnable(GL_CULL_FACE);
 			glCullFace(GL_FRONT);
 			// Debug::print(model);
-			Transform cam;
+			Camera	cam(win);
 
-			cam.translate(Vec3(0, 0, 2));
+			cam.translate(Vec3(0, 0, -2));
 			Vec3 right(1, 0, 0);
 			Vec3 up(0, 1, 0);
 			while (win.isOpen())
@@ -131,6 +109,7 @@ int main()
 				/* ******************** */
 				/* * UPDATE           * */
 				/* ******************** */
+				cam.move();
 				if (glfwGetMouseButton(win.getGLFW(), GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS ||
 					win.isGrabbed())
 				{
@@ -145,7 +124,7 @@ int main()
 					}
 					// Debug::print(win.dirMouse);
 				}
-				cam_move(win, cam);
+				// cam_move(win, cam);
 				/* ******************** */
 				/* * RENDU            * */
 				/* ******************** */
@@ -155,6 +134,7 @@ int main()
 				sample.bind();
 				sample.uniformMat4((GLchar *)"projection", (GLfloat *)&win.matProjection);
 				Mat4x4 viewMat = cam.toMatrix();
+				Debug::print(viewMat);
 				sample.uniformMat4((GLchar *)"view", (GLfloat *)&viewMat);
 				sample.uniformMat4((GLchar *)"model", (GLfloat *)&model_body);
 				mesh.render(GL_TRIANGLES);

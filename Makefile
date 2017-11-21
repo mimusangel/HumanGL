@@ -16,7 +16,8 @@ SRC = \
 	shaders.cpp \
 	mesh.cpp \
 	debug.cpp \
-	transform.cpp
+	transform.cpp \
+	camera.cpp
 
 
 
@@ -71,7 +72,9 @@ ffclean: fclean
 	$(addprefix $(MAKE) fclean -C , $(addsuffix ;, $(LIB_DIR)))
 run:
 	./$(NAME)
-ar: all run
+clear:
+	clear
+ar: clear all run
 re: fclean all
 
 -include $(D_FILE)

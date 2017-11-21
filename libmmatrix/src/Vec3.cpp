@@ -213,4 +213,8 @@ namespace mmatrix
 		}
 		return (*this);
 	}
+	Vec3 		Vec3::negate(void)
+	{
+		return (Vec3(-_val[0], -_val[1], -_val[2]));
+	}
 }

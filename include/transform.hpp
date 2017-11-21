@@ -6,7 +6,7 @@ using namespace mmatrix;
 
 class Transform
 {
-private:
+protected:
 	Transform	*_parent;
 	Vec3		_position;
 	Quat		_rotate;

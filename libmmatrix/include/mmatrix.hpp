@@ -77,6 +77,7 @@ namespace mmatrix
 		float		dot(const Vec3 &v);
 		float		length(void);
 		Vec3 		&normalise(void);
+		Vec3 		negate(void);
 	private:
 		float	_val[3];
 	};
