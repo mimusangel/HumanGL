@@ -43,5 +43,6 @@ Mat4x4		Transform::toMatrix(void)
 	Mat4x4	parentMat = Mat4x4::Identity();
 	if (_parent != nullptr)
 		parentMat = _parent->toMatrix();
+	//T * R * S
 	return (parentMat * (rotationMat * translateMat));
 }
