@@ -11,9 +11,12 @@ private:
 	bool				_grab;
 
 public:
+	int					width;
+	int					height;
 	mmatrix::Vec2		mouse;
 	mmatrix::Vec2		dirMouse;
 	mmatrix::Vec2		dirMouseSmooth;
+	mmatrix::Mat4x4		matProjection;
 	Window(int width, int height, std::string title);
 	~Window();
 	std::string			&getError(void);

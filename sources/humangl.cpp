@@ -99,7 +99,7 @@ int main()
 			//other		Vec3(0.125f, 0.375f, 0.125f);
 			//other		Vec3(0.125f, 0.1875f, 0.125f);
 
-			Mat4x4	perspective = Mat4x4::Perspective(70.0f, 1280.0f / 720.0f, 0.1f, 1000.0f);
+			// Mat4x4	perspective = Mat4x4::Perspective(70.0f, 1280.0f / 720.0f, 0.1f, 1000.0f);
 			Mat4x4	model_head = Mat4x4::Translate(Vec3(0, 0.750f, 0));
 			model_head.scale_aniso(Vec3(0.25f, 0.25f, 0.25f));
 			model_head.translate_in_place(Vec3(-0.5f, 0.0f, -0.5f));
@@ -147,13 +147,6 @@ int main()
 					// Debug::print(win.dirMouse);
 				}
 				cam_move(win, cam);
-				/*else
-				{
-					win.dirMouse[0] = 0;
-					win.dirMouse[1] = 0;
-					if (glfwGetMouseButton(win.getGLFW(), GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
-						win.setGrab(true);
-				}*/
 				/* ******************** */
 				/* * RENDU            * */
 				/* ******************** */
@@ -161,7 +154,7 @@ int main()
 				glClearColor(0.5, 0.5, 0.5, 1);
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 				sample.bind();
-				sample.uniformMat4((GLchar *)"projection", (GLfloat *)&perspective);
+				sample.uniformMat4((GLchar *)"projection", (GLfloat *)&win.matProjection);
 				Mat4x4 viewMat = cam.toMatrix();
 				sample.uniformMat4((GLchar *)"view", (GLfloat *)&viewMat);
 				sample.uniformMat4((GLchar *)"model", (GLfloat *)&model_body);

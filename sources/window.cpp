@@ -1,3 +1,4 @@
+#include "humangl.hpp"
 #include "window.hpp"
 #include "debug.hpp"
 #define SMOOTH_DEPTH 3
@@ -50,6 +51,18 @@ static void mouse_button_callback(GLFWwindow* window, int button, int action, in
 		return ;
 }
 
+static void win_resize_callback(GLFWwindow *window, int width, int height)
+{
+	Window	*win;
+
+	win = (Window *)glfwGetWindowUserPointer(window);
+	win->width = width;
+	win->height = height;
+	glViewport(0, 0, width, height);
+	win->matProjection = Mat4x4::Perspective(TORADIANS(70.0f),
+		(float)width / (float)height, 0.001f, 1000.0f);
+}
+
 /*
 ** Class Window
 */
@@ -68,9 +81,11 @@ Window::Window(int width, int height, std::string title) : _grab(false), mouse(0
 		glfwSetKeyCallback(_win, key_callback);
 		glfwSetCursorPosCallback(_win, cursor_position_callback);
 		glfwSetMouseButtonCallback(_win, mouse_button_callback);
+		glfwSetFramebufferSizeCallback(_win, win_resize_callback);
 		glewExperimental = GL_TRUE;
 		if (glewInit() != GLEW_OK)
 			_error = "Erreur init glew!";
+		win_resize_callback(_win, width, height);
 	}
 	else
 		_error = "La fenetre n'a pas pu etre creer.";
