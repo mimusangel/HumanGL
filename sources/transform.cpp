@@ -1,6 +1,7 @@
 #include <cmath>
 #include <cstring>
 #include "transform.hpp"
+#include "debug.hpp"
 using namespace mmatrix;
 
 Transform::Transform(const Vec3 &pos, const Quat &rot) : _parent(nullptr), _position(pos), _rotate(rot)
@@ -31,7 +32,7 @@ Transform	&Transform::setRotate(const Vec3 &angle)
 
 Transform	&Transform::translate(const Vec3 &value)
 {
-	_position += value;
+	_position += _rotate * value;
 	return (*this);
 }
 

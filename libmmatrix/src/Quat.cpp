@@ -79,15 +79,6 @@ namespace mmatrix
 	{
 		return (this->_val[i]);
 	}
-	Vec3			Quat::operator*(const Vec3 &v)
-	{
-		Vec3	t;
-		Vec3	u;
-
-		t = this[0].xyz().cross(v) * 2;
-		u = this[0].xyz().cross(t);
-		return (t * 3 + u + v);
-	}
 	Quat 			&Quat::operator=(const Quat &v)
 	{
 		memcpy(this, &v, sizeof(Quat));
@@ -146,6 +137,13 @@ namespace mmatrix
 	{
 		*this = *this * v;
 		return (*this);
+	}
+	Vec3			Quat::operator*(const Vec3 &v)
+	{
+		Vec3	t;
+
+		t = xyz().cross(v) * 2;
+		return (t * _val[3] + xyz().cross(t) + v);
 	}
 	float			Quat::mulInner(const Quat &v)
 	{

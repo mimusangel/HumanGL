@@ -7,11 +7,11 @@ using namespace mmatrix;
 
 class Debug {
 public:
-	static void			print(Vec2 &value);
-	static void			print(Vec3 &value);
-	static void			print(Vec4 &value);
-	static void			print(Mat4x4 &value);
-	static void			print(Quat &value);
+	static void			print(const Vec2 &value);
+	static void			print(const Vec3 &value);
+	static void			print(const Vec4 &value);
+	static void			print(const Mat4x4 &value);
+	static void			print(const Quat &value);
 };
 
 #endif
