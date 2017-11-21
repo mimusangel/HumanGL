@@ -134,6 +134,15 @@ namespace mmatrix
 			{0.0f, 0.0f, 2.0f * far * near / (near - far), 0.0f}
 		}));
 	}
+	Mat4x4			Mat4x4::Translate(const Vec3 &v)
+	{
+		Mat4x4	mat = Identity();
+
+		mat[3][0] = v[0];
+		mat[3][1] = v[1];
+		mat[3][2] = v[2];
+		return (mat);
+	}
 	Vec4			&Mat4x4::operator[](const int i)
 	{
 		return (this->_val[i]);
@@ -366,15 +375,6 @@ namespace mmatrix
 		_val[3][1] = v[1];
 		_val[3][2] = v[2];
 		return (*this);
-	}
-	Mat4x4			Mat4x4::translate(const Vec3 &v)
-	{
-		Mat4x4	mat = Identity();
-
-		mat[3][0] = v[0];
-		mat[3][1] = v[1];
-		mat[3][2] = v[2];
-		return (mat);
 	}
 	Mat4x4			&Mat4x4::translate_in_place(const Vec3 &v)
 	{

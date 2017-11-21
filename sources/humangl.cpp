@@ -55,10 +55,9 @@ int main()
 				mesh.add(0, GL_FLOAT, 3, (void *)g_vertex_buffer_data, 36);
 				mesh.end();
 			}
-			Mat4x4 perspective = Mat4x4::Perspective(70.0f, 1280.0f / 720.0f, 0.1f, 1000.0f);
-			Mat4x4 model;
-			model = model.translate(Vec3(-0.5f, -0.5f, -0.5f));
-			// model = model.translate(Vec3(0, 0, 0));
+			Mat4x4	perspective = Mat4x4::Perspective(70.0f, 1280.0f / 720.0f, 0.1f, 1000.0f);
+			Mat4x4	model;
+			model = Mat4x4::Translate(Vec3(-0.5f, -0.5f, -0.5f));
 			glEnable(GL_DEPTH_TEST);
 			glEnable(GL_CULL_FACE);
 			glCullFace(GL_FRONT);
@@ -78,13 +77,14 @@ int main()
 				{
 					if (glfwGetKey(win.getGLFW(), GLFW_KEY_ESCAPE) == GLFW_PRESS)
 						win.setGrab(false);
-					if (win.dirMouse[1] != 0.0f)
-						cam.rotate(right, win.dirMouse[1]);
-					if (win.dirMouse[0] != 0.0f)
-						cam.rotate(up, win.dirMouse[0]);
+					if (win.dirMouse[0] != 0.0f || win.dirMouse[0] != 0.0f)
+					{
+						static Vec2	euler;
+						euler += win.dirMouse;
+						cam.setRotate(Vec3(TORADIANS(euler[1]), TORADIANS(euler[0]), 0));
+					}
 					win.dirMouse[0] = 0;
 					win.dirMouse[1] = 0;
-
 					// Debug::print(win.dirMouse);
 				}
 				else

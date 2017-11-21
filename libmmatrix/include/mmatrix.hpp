@@ -132,6 +132,7 @@ namespace mmatrix
 		static Mat4x4	Ortho(float v[6]);
 		static Mat4x4	Perspective(const float y_fov, const float aspect,
 			const float near, const float far);
+		static Mat4x4	Translate(const Vec3 &v);
 		Vec4			&operator[](const int i);
 		const Vec4		&operator[](const int i) const;
 		Mat4x4 			&operator=(const Mat4x4 &v);
@@ -154,7 +155,6 @@ namespace mmatrix
 		Mat4x4			&rotate_y(const float angle);
 		Mat4x4			&rotate_z(const float angle);
 		Mat4x4			&set_translate(const Vec3 &v);
-		Mat4x4			translate(const Vec3 &v);
 		Mat4x4			&translate_in_place(const Vec3 &v);
 		Mat4x4 			transpose();
 	private:
@@ -168,6 +168,7 @@ namespace mmatrix
 		Quat(const Mat4x4 &v);
 		static Quat		Identity(void);
 		static Quat		Rotate(const Vec3 &up, const float angle);
+		static Quat		SetRotate(const Vec3 &angle);
 		float			&operator[](const int i);
 		const float		&operator[](const int i) const;
 		Quat 			&operator=(const Quat &v);

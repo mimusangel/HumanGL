@@ -12,7 +12,13 @@ Transform	&Transform::setParent(Transform *parent)
 
 Transform	&Transform::rotate(const Vec3 &axis, float angle)
 {
-	_rotate = Quat::Rotate(axis, TORADIANS(angle)) * _rotate;
+	_rotate = Quat::Rotate(axis, angle) * _rotate;
+	return (*this);
+}
+
+Transform	&Transform::setRotate(const Vec3 &angle)
+{
+	_rotate = Quat::SetRotate(angle);
 	return (*this);
 }
 
