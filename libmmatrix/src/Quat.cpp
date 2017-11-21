@@ -66,9 +66,9 @@ namespace mmatrix
 	Quat		Quat::SetRotate(const Vec3 &angle)
 	{
 		return (
-			Rotate(Vec3(0, 0, 1), angle[0]) *
-			Rotate(Vec3(0, 1, 0), angle[1]) *
-			Rotate(Vec3(1, 0, 0), angle[2])
+			Rotate(Vec3(0, 0, 1), angle[2]) *
+			Rotate(Vec3(0, 1, 0), angle[0]) *
+			Rotate(Vec3(1, 0, 0), angle[1])
 		);
 	}
 	float		&Quat::operator[](const int i)

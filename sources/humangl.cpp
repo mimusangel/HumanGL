@@ -71,14 +71,25 @@ int main()
 				mesh.add(1, GL_FLOAT, 3, (void *)g_color_buffer_data, 36);
 				mesh.end();
 			}
+			//head		Vec3(0.25f, 0.25f, 0.25f);
+			//body		Vec3(0.25f, 0.375f, 0.125f);
+			//other		Vec3(0.125f, 0.375f, 0.125f);
+			//other		Vec3(0.125f, 0.1875f, 0.125f);
+
 			Mat4x4	perspective = Mat4x4::Perspective(70.0f, 1280.0f / 720.0f, 0.1f, 1000.0f);
-			Mat4x4	model = Mat4x4::Identity();
-			model.scale_aniso(Vec3(0.5f, 1.0f, 0.5f));
-			model.translate_in_place(Vec3(-0.5f, -0.5f, -0.5f));
+			Mat4x4	model_head = Mat4x4::Translate(Vec3(0, 0.375f * 2, 0));
+			model_head.scale_aniso(Vec3(0.25f, 0.25f, 0.25f));
+			model_head.translate_in_place(Vec3(-0.5f, 0.0f, -0.5f));
+			Mat4x4	model_body = Mat4x4::Translate(Vec3(0, 0.375f, 0));
+			model_body.scale_aniso(Vec3(0.25f, 0.375f, 0.125f));
+			model_body.translate_in_place(Vec3(-0.5f, 0.0f, -0.5f));
+			Mat4x4	model_right_leg = Mat4x4::Translate(Vec3(0.0625f, 0.375f, 0));
+			model_right_leg.scale_aniso(Vec3(0.125f, 0.375f, 0.125f));
+			model_right_leg.translate_in_place(Vec3(-0.5f, -1.0f, -0.5f));
 			glEnable(GL_DEPTH_TEST);
 			glEnable(GL_CULL_FACE);
 			glCullFace(GL_FRONT);
-			Debug::print(model);
+			// Debug::print(model);
 			Transform cam;
 
 			cam.translate(Vec3(0, 0, 2));
@@ -118,12 +129,16 @@ int main()
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 				sample.bind();
 				sample.uniformMat4((GLchar *)"projection", (GLfloat *)&perspective);
-				sample.uniformMat4((GLchar *)"model", (GLfloat *)&model);
 				Mat4x4 viewMat = cam.toMatrix();
 				sample.uniformMat4((GLchar *)"view", (GLfloat *)&viewMat);
-				mesh.render(GL_TRIANGLES); // GL_LINE_STRIP
+				sample.uniformMat4((GLchar *)"model", (GLfloat *)&model_body);
+				mesh.render(GL_TRIANGLES);
+				sample.uniformMat4((GLchar *)"model", (GLfloat *)&model_head);
+				mesh.render(GL_TRIANGLES);
+				sample.uniformMat4((GLchar *)"model", (GLfloat *)&model_right_leg);
+				mesh.render(GL_TRIANGLES);
 				win.update();
-			}
+			} // GL_LINE_STRIP
 		}
 	}
 	return (0);
