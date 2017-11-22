@@ -39,17 +39,8 @@ int main()
 			Cube::Load();
 			Human human;
 			Camera	cam(win);
-			Anim	anim(10);
+			Anim	anim = AnimManager::loadMasturbate();
 			anim.setLoop(true);
-
-			anim.addAnimPoint(-1, 1, Vec3(0, 0, 1));
-			anim.addAnimPoint(-1, 2, Vec3(0, 0, 0));
-			anim.addAnimPoint(0, 1, Vec3(0, TORADIANS(90), 0));
-			anim.addAnimPoint(0, 2, Vec3(0, TORADIANS(0), 0));
-			anim.addAnimPoint(2, 1, Vec3(0, 0, TORADIANS(-90)));
-			anim.addAnimPoint(2, 2, Vec3(0, 0, TORADIANS(0)));
-			anim.addAnimPoint(3, 1, Vec3(0, 0, TORADIANS(90)));
-			anim.addAnimPoint(3, 2, Vec3(0, 0, TORADIANS(0)));
 			human.setAnim(&anim);
 			cam.translate(Vec3(0, 0, -2));
 			while (win.isOpen())
