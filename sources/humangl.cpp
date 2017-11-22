@@ -40,15 +40,13 @@ int main()
 			Human human;
 			Camera	cam(win);
 			// Anim	anim(10);
-			Anim	animList[10] = {
+			Anim	animList[8] = {
 				AnimManager::loadIdle(),
 				AnimManager::loadWalk(0.2),
 				AnimManager::loadRun(),
 				AnimManager::loadJump(),
-				AnimManager::loadTwerk(),
 				AnimManager::loadCrouch(),
 				AnimManager::loadMasturbate(),
-				AnimManager::loadExorciste(),
 				AnimManager::loadNeo(),
 				AnimManager::loadCloClo()
 			};

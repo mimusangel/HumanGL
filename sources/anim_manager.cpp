@@ -135,13 +135,6 @@ Anim	AnimManager::loadJump(float speed)
 	return (anim);
 }
 
-Anim	AnimManager::loadTwerk(float speed)
-{
-	Anim	anim(10);
-
-	return (anim);
-}
-
 Anim	AnimManager::loadCrouch(float speed)
 {
 	Anim	anim(10);
@@ -206,41 +199,34 @@ Anim	AnimManager::loadMasturbate(float speed)
 	return (anim);
 }
 
-Anim AnimManager::loadExorciste(float speed)
-{
-	Anim	anim(10);
-
-	return (anim);
-}
-
 Anim AnimManager::loadNeo(float speed)
 {
 	Anim	anim(10);
 
-	anim.addAnimPoint(-1, 0.5, Vec3(0, -0.1, -0.25))
-		.addAnimPoint(-1, 4.5, Vec3(0, -0.1, -0.25))
-		.addAnimPoint(-1, 5, Vec3(0, 0, 0))
-		.addAnimPoint(0, 0.5, Vec3(TORADIANS(-90), 0, 0))
-		.addAnimPoint(0, 4.5, Vec3(TORADIANS(-90), 0, 0))
-		.addAnimPoint(0, 5, Vec3(0, 0, 0))
-		.addAnimPoint(2, 0.25, Vec3(TORADIANS(-90), TORADIANS(-90), TORADIANS(0)))
-		.addAnimPoint(2, 0.4, Vec3(TORADIANS(-160), TORADIANS(-45), TORADIANS(0)))
-		.addAnimPoint(2, 4.5, Vec3(TORADIANS(-16000000), TORADIANS(0), TORADIANS(0)))
-		.addAnimPoint(6, 0.25, Vec3(TORADIANS(-90), TORADIANS(90), TORADIANS(0)))
-		.addAnimPoint(6, 0.4, Vec3(TORADIANS(-160), TORADIANS(45), TORADIANS(0)))
-		.addAnimPoint(6, 4.5, Vec3(TORADIANS(16000000), TORADIANS(0), TORADIANS(0)))
-		.addAnimPoint(4, 0.5, Vec3(TORADIANS(45), TORADIANS(10), TORADIANS(-10)))
-		.addAnimPoint(4, 4.5, Vec3(TORADIANS(45), TORADIANS(10), TORADIANS(-10)))
-		.addAnimPoint(4, 5, Vec3(0, 0, 0))
-		.addAnimPoint(8, 0.5, Vec3(TORADIANS(45), TORADIANS(-10), TORADIANS(10)))
-		.addAnimPoint(8, 4.5, Vec3(TORADIANS(45), TORADIANS(-10), TORADIANS(10)))
-		.addAnimPoint(8, 5, Vec3(0, 0, 0))
-		.addAnimPoint(5, 0.5, Vec3(TORADIANS(45), TORADIANS(10), 0))
-		.addAnimPoint(5, 4.5, Vec3(TORADIANS(45), TORADIANS(10), 0))
-		.addAnimPoint(5, 5, Vec3(0, 0, 0))
-		.addAnimPoint(9, 0.5, Vec3(TORADIANS(45), TORADIANS(-10), 0))
-		.addAnimPoint(9, 4.5, Vec3(TORADIANS(45), TORADIANS(-10), 0))
-		.addAnimPoint(9, 5, Vec3(0, 0, 0));
+	anim.addAnimPoint(-1, speed * 0.5, Vec3(0, -0.1, -0.25))
+		.addAnimPoint(-1, speed * 4.5, Vec3(0, -0.1, -0.25))
+		.addAnimPoint(-1, speed * 5, Vec3(0, 0, 0))
+		.addAnimPoint(0, speed * 0.5, Vec3(TORADIANS(-90), 0, 0))
+		.addAnimPoint(0, speed * 4.5, Vec3(TORADIANS(-90), 0, 0))
+		.addAnimPoint(0, speed * 5, Vec3(0, 0, 0))
+		.addAnimPoint(2, speed * 0.25, Vec3(TORADIANS(-90), TORADIANS(-90), TORADIANS(0)))
+		.addAnimPoint(2, speed * 0.4, Vec3(TORADIANS(-160), TORADIANS(-45), TORADIANS(0)))
+		.addAnimPoint(2, speed * 4.5, Vec3(TORADIANS(-16000000), TORADIANS(0), TORADIANS(0)))
+		.addAnimPoint(6, speed * 0.25, Vec3(TORADIANS(-90), TORADIANS(90), TORADIANS(0)))
+		.addAnimPoint(6, speed * 0.4, Vec3(TORADIANS(-160), TORADIANS(45), TORADIANS(0)))
+		.addAnimPoint(6, speed * 4.5, Vec3(TORADIANS(16000000), TORADIANS(0), TORADIANS(0)))
+		.addAnimPoint(4, speed * 0.5, Vec3(TORADIANS(45), TORADIANS(10), TORADIANS(-10)))
+		.addAnimPoint(4, speed * 4.5, Vec3(TORADIANS(45), TORADIANS(10), TORADIANS(-10)))
+		.addAnimPoint(4, speed * 5, Vec3(0, 0, 0))
+		.addAnimPoint(8, speed * 0.5, Vec3(TORADIANS(45), TORADIANS(-10), TORADIANS(10)))
+		.addAnimPoint(8, speed * 4.5, Vec3(TORADIANS(45), TORADIANS(-10), TORADIANS(10)))
+		.addAnimPoint(8, speed * 5, Vec3(0, 0, 0))
+		.addAnimPoint(5, speed * 0.5, Vec3(TORADIANS(45), TORADIANS(10), 0))
+		.addAnimPoint(5, speed * 4.5, Vec3(TORADIANS(45), TORADIANS(10), 0))
+		.addAnimPoint(5, speed * 5, Vec3(0, 0, 0))
+		.addAnimPoint(9, speed * 0.5, Vec3(TORADIANS(45), TORADIANS(-10), 0))
+		.addAnimPoint(9, speed * 4.5, Vec3(TORADIANS(45), TORADIANS(-10), 0))
+		.addAnimPoint(9, speed * 5, Vec3(0, 0, 0));
 
 	return (anim);
 }
@@ -248,6 +234,77 @@ Anim AnimManager::loadNeo(float speed)
 Anim AnimManager::loadCloClo(float speed)
 {
 	Anim	anim(10);
+	anim.addAnimPoint(0, speed * 6.f, Vec3(0.f, 0.f, 0.f))
+		.addAnimPoint(0, speed * 10.f, Vec3(0.f, TORADIANS(360.f), 0.f))
+		// Bras Gauche
+		.addAnimPoint(2, speed * 1.f, Vec3(TORADIANS(-45.f), 0.f, 0.f))
+		.addAnimPoint(2, speed * 1.5f, Vec3(TORADIANS(-35.f), 0.f, 0.f))
+		.addAnimPoint(2, speed * 2.f, Vec3(TORADIANS(-80.f), 0.f, 0.f))
+		.addAnimPoint(2, speed * 3.f, Vec3(TORADIANS(-5.f), 0.f, 0.f))
+		.addAnimPoint(2, speed * 4.f, Vec3(TORADIANS(-45.f), 0.f, 0.f))
+		.addAnimPoint(2, speed * 4.5f, Vec3(TORADIANS(-35.f), 0.f, 0.f))
+		.addAnimPoint(2, speed * 5.f, Vec3(TORADIANS(-80.f), 0.f, 0.f))
+		.addAnimPoint(2, speed * 6.f, Vec3(0.f, 0.f, 0.f))
+		.addAnimPoint(2, speed * 7.5f, Vec3(0.f, TORADIANS(-30.f), TORADIANS(-85.f)))
+		.addAnimPoint(2, speed * 10.f, Vec3(0.f, 0.f, 0.f))
+		.addAnimPoint(3, speed * 1.f, Vec3(TORADIANS(-135.f), 0.f, 0.f))
+		.addAnimPoint(3, speed * 1.5f, Vec3(TORADIANS(-145.f), 0.f, 0.f))
+		.addAnimPoint(3, speed * 2.f, Vec3(TORADIANS(-15.f), 0.f, 0.f))
+		.addAnimPoint(3, speed * 2.5f, Vec3(TORADIANS(-45.f), 0.f, 0.f))
+		.addAnimPoint(3, speed * 3.f, Vec3(TORADIANS(-5.f), 0.f, 0.f))
+		.addAnimPoint(3, speed * 4.f, Vec3(TORADIANS(-135.f), 0.f, 0.f))
+		.addAnimPoint(3, speed * 4.5f, Vec3(TORADIANS(-145.f), 0.f, 0.f))
+		.addAnimPoint(3, speed * 5.f, Vec3(TORADIANS(-15.f), 0.f, 0.f))
+		.addAnimPoint(3, speed * 5.5f, Vec3(TORADIANS(-45.f), 0.f, 0.f))
+		.addAnimPoint(3, speed * 6.f, Vec3(0.f, 0.f, 0.f))
+		.addAnimPoint(3, speed * 7.5f, Vec3(TORADIANS(-45.f), 0.f, 0.f))
+		.addAnimPoint(3, speed * 10.f, Vec3(0.f, 0.f, 0.f))
+		// Bras droite
+		.addAnimPoint(6, speed * 1.f, Vec3(TORADIANS(-45.f), 0.f, 0.f))
+		.addAnimPoint(6, speed * 1.5f, Vec3(TORADIANS(-35.f), 0.f, 0.f))
+		.addAnimPoint(6, speed * 2.f, Vec3(TORADIANS(-80.f), 0.f, 0.f))
+		.addAnimPoint(6, speed * 3.f, Vec3(TORADIANS(-5.f), 0.f, 0.f))
+		.addAnimPoint(6, speed * 4.f, Vec3(TORADIANS(-45.f), 0.f, 0.f))
+		.addAnimPoint(6, speed * 4.5f, Vec3(TORADIANS(-35.f), 0.f, 0.f))
+		.addAnimPoint(6, speed * 5.f, Vec3(TORADIANS(-80.f), 0.f, 0.f))
+		.addAnimPoint(6, speed * 6.f, Vec3(0.f, 0.f, 0.f))
+		.addAnimPoint(6, speed * 7.5f, Vec3(0.f, TORADIANS(-30.f), TORADIANS(85.f)))
+		.addAnimPoint(6, speed * 10.f, Vec3(0.f, 0.f, 0.f))
+		.addAnimPoint(7, speed * 1.f, Vec3(TORADIANS(-135.f), 0.f, 0.f))
+		.addAnimPoint(7, speed * 1.5f, Vec3(TORADIANS(-145.f), 0.f, 0.f))
+		.addAnimPoint(7, speed * 2.f, Vec3(TORADIANS(-15.f), 0.f, 0.f))
+		.addAnimPoint(7, speed * 2.5f, Vec3(TORADIANS(-45.f), 0.f, 0.f))
+		.addAnimPoint(7, speed * 3.f, Vec3(TORADIANS(-5.f), 0.f, 0.f))
+		.addAnimPoint(7, speed * 4.f, Vec3(TORADIANS(-135.f), 0.f, 0.f))
+		.addAnimPoint(7, speed * 4.5f, Vec3(TORADIANS(-145.f), 0.f, 0.f))
+		.addAnimPoint(7, speed * 5.f, Vec3(TORADIANS(-15.f), 0.f, 0.f))
+		.addAnimPoint(7, speed * 5.5f, Vec3(TORADIANS(-45.f), 0.f, 0.f))
+		.addAnimPoint(7, speed * 6.f, Vec3(0.f, 0.f, 0.f))
+		.addAnimPoint(7, speed * 7.5f, Vec3(TORADIANS(-45.f), 0.f, 0.f))
+		.addAnimPoint(7, speed * 10.f, Vec3(0.f, 0.f, 0.f))
+		// Jambe Gauche
+		.addAnimPoint(4, speed * 2.f, Vec3(TORADIANS(-20.f), TORADIANS(10.f), 0.f))
+		.addAnimPoint(4, speed * 4.f, Vec3(0.f, TORADIANS(-10.f), TORADIANS(-10.f)))
+		.addAnimPoint(4, speed * 6.f, Vec3(TORADIANS(7.5f), 0.f, 0.f))
+		.addAnimPoint(4, speed * 8.f, Vec3(TORADIANS(15.f), 0.f, TORADIANS(30.f)))
+		.addAnimPoint(4, speed * 10.f, Vec3(0.f, 0.f, 0.f))
+		.addAnimPoint(5, speed * 2.f, Vec3(TORADIANS(30.f), 0.f, 0.f))
+		.addAnimPoint(5, speed * 4.f, Vec3(TORADIANS(10.f), 0.f, 0.f))
+		.addAnimPoint(5, speed * 6.f, Vec3(0.f, 0.f, 0.f))
+		.addAnimPoint(5, speed * 8.f, Vec3(TORADIANS(30.f), 0.f, 0.f))
+		.addAnimPoint(5, speed * 10.f, Vec3(0.f, 0.f, 0.f))
 
+		// Jambe Droite
+		.addAnimPoint(8, speed * 2.f, Vec3(TORADIANS(-20.f), TORADIANS(-10.f), 0.f))
+		.addAnimPoint(8, speed * 4.f, Vec3(0.f, TORADIANS(10.f), TORADIANS(10.f)))
+		.addAnimPoint(8, speed * 6.f, Vec3(TORADIANS(-7.5f), 0.f, 0.f))
+		.addAnimPoint(8, speed * 8.f, Vec3(TORADIANS(-15.f), 0.f, TORADIANS(-30.f)))
+		.addAnimPoint(8, speed * 10.f, Vec3(0.f, 0.f, 0.f))
+		.addAnimPoint(9, speed * 2.f, Vec3(TORADIANS(30.f), 0.f, 0.f))
+		.addAnimPoint(9, speed * 4.f, Vec3(TORADIANS(10.f), 0.f, 0.f))
+		.addAnimPoint(9, speed * 6.f, Vec3(0.f, 0.f, 0.f))
+		.addAnimPoint(9, speed * 8.f, Vec3(TORADIANS(30.f), 0.f, 0.f))
+		.addAnimPoint(9, speed * 10.f, Vec3(0.f, 0.f, 0.f))
+	;
 	return (anim);
 }
