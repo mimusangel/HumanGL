@@ -26,7 +26,7 @@ public:
 	Anim	&addAnimPoint(int id, const double tm, const Vec3 &rot = Vec3());
 	void	getAnim(int id, const double tm, Vec3 &rot);
 	bool	isFinish(const double tm);
-	void	setLoop(bool ok);
+	Anim	&setLoop(bool ok);
 };
 
 class AnimManager {

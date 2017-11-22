@@ -64,7 +64,8 @@ bool	Anim::isFinish(const double tm)
 	return (tm > _tmEnd);
 }
 
-void	Anim::setLoop(bool ok)
+Anim	&Anim::setLoop(bool ok)
 {
 	_loop = ok;
+	return (*this);
 }
