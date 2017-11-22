@@ -18,8 +18,8 @@ SRC = \
 	debug.cpp \
 	transform.cpp \
 	camera.cpp \
-	cube.cpp
-
+	cube.cpp \
+	human.cpp
 
 
 

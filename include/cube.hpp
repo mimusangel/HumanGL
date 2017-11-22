@@ -3,6 +3,7 @@
 
 # include "humangl.hpp"
 # include "mesh.hpp"
+# include "shaders.hpp"
 using namespace mmatrix;
 
 class Cube {
@@ -14,7 +15,7 @@ public:
 	static void		Unload(void);
 	static void		Render(void);
 
-// private:
+private:
 	Vec3	_position;
 	Vec3	_rotate;
 	Vec3	_offset;
@@ -26,6 +27,9 @@ public:
 	Cube	&setParent(Cube *parent);
 	Mat4x4	toMatrix(const bool isChild = false);
 	Cube	&setRotate(const Vec3 &rot);
+	void	render(Shaders &shader, const Vec3 &color = Vec3(1.f));
+	Vec3	&getScale(void);
+	Cube	&translate(const Vec3 &pos);
 };
 
 #endif

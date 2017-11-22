@@ -24,18 +24,18 @@ void		Cube::Load(void)
 		0.5f, -0.5f, -0.5f, 0.5f, -0.5f, 0.5f, -0.5f, -0.5f, -0.5f
 	};
 	static const GLfloat g_color_buffer_data[] = {
-		0, 0, 1, 0, 0, 1, 0, 0, 1,
-		0, 1, 0, 0, 1, 0, 0, 1, 0,
-		0, 1, 1, 0, 1, 1, 0, 1, 1,
-		1, 0, 0, 1, 0, 0, 1, 0, 0,
-		1, 0, 1, 1, 0, 1, 1, 0, 1,
-		1, 1, 0, 1, 1, 0, 1, 1, 0,
 		1, 1, 1, 1, 1, 1, 1, 1, 1,
-		0, 0, 1, 0, 0, 1, 0, 0, 1,
-		0, 1, 0, 0, 1, 0, 0, 1, 0,
-		0, 1, 1, 0, 1, 1, 0, 1, 1,
-		1, 0, 0, 1, 0, 0, 1, 0, 0,
-		1, 0, 1, 1, 0, 1, 1, 0, 1
+		1, 1, 1, 1, 1, 1, 1, 1, 1,
+		1, 1, 1, 1, 1, 1, 1, 1, 1,
+		1, 1, 1, 1, 1, 1, 1, 1, 1,
+		.9f, .9f, .9f, .9f, .9f, .9f, .9f, .9f, .9f,
+		.9f, .9f, .9f, .9f, .9f, .9f, .9f, .9f, .9f,
+		.9f, .9f, .9f, .9f, .9f, .9f, .9f, .9f, .9f,
+		.9f, .9f, .9f, .9f, .9f, .9f, .9f, .9f, .9f,
+		.8f, .8f, .8f, .8f, .8f, .8f, .8f, .8f, .8f,
+		.8f, .8f, .8f, .8f, .8f, .8f, .8f, .8f, .8f,
+		.8f, .8f, .8f, .8f, .8f, .8f, .8f, .8f, .8f,
+		.8f, .8f, .8f, .8f, .8f, .8f, .8f, .8f, .8f,
 	};
 	mesh = new Mesh(2);
 	mesh->begin();
@@ -77,7 +77,7 @@ Mat4x4	Cube::toMatrix(const bool isChild)
 	if (_parent != nullptr)
 	{
 		parentMatrix = _parent->toMatrix(true);
-		matrix = Mat4x4::Translate(_position * _parent->_scale);
+		matrix = Mat4x4::Translate(_position * _parent->getScale());
 	}
 	else
 	{
@@ -99,4 +99,23 @@ Cube	&Cube::setRotate(const Vec3 &rot)
 {
 	_rotate = rot;
 	return (*this);
+}
+
+Cube	&Cube::translate(const Vec3 &pos)
+{
+	_position += pos;
+	return (*this);
+}
+
+void	Cube::render(Shaders &shader, const Vec3 &color)
+{
+	Mat4x4 model = toMatrix();
+	shader.uniformMat4((GLchar *)"model", (GLfloat *)&model);
+	shader.uniform3f((GLchar *)"uColor", (GLfloat *)&color);
+	Cube::Render();
+}
+
+Vec3	&Cube::getScale(void)
+{
+	return (_scale);
 }

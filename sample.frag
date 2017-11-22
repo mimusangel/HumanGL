@@ -2,8 +2,10 @@
 
 out vec4 color;
 
+uniform vec3 uColor;
+
 in vec3 vColor;
 
 void main(){
-	color = vec4(vColor, 1.0);
+	color = vec4(vColor * uColor, 1.0);
 }
