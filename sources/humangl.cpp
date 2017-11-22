@@ -71,6 +71,7 @@ int main()
 				sample.uniformMat4((GLchar *)"view", (GLfloat *)&viewMat);
 				human.render(sample);
 				win.update();
+			}
 		}
 	}
 	Cube::Unload();
