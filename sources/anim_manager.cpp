@@ -246,6 +246,10 @@ Anim AnimManager::loadNeo(float speed)
 Anim AnimManager::loadCloClo(float speed)
 {
 	Anim	anim(10);
-
+	anim.addAnimPoint(2, speed * 1.f, Vec3(TORADIANS(-45.f), 0.f, 0.f))
+		.addAnimPoint(2, speed * 2.f, Vec3(0.f, 0.f, 0.f))
+		.addAnimPoint(3, speed * 1.f, Vec3(TORADIANS(-135.f), 0.f, 0.f))
+		.addAnimPoint(3, speed * 2.f, Vec3(0.f, 0.f, 0.f))
+	;
 	return (anim);
 }

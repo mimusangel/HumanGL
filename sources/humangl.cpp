@@ -40,7 +40,7 @@ int main()
 			Human human;
 			Camera	cam(win);
 			// Anim	anim(10);
-			Anim	anim = AnimManager::loadCrouch(1.f);
+			Anim	anim = AnimManager::loadCloClo(1.f);
 			// Anim	anim = AnimManager::loadNeo();
 			anim.setLoop(true);
 
