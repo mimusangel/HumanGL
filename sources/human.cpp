@@ -70,6 +70,7 @@ void		Human::switchCloth(void)
 		_colors[12] = Vec3(0.32f, 0.24f, 0.196f);
 		_colors[13] = Vec3(0.5f, 0.f, 0.f);
 		_colors[14] = Vec3(0.9960784314f, 0.7647058824f, 0.6745098039f);
+		_parts[14].visible = false;
 	}
 	else
 	{
@@ -88,8 +89,8 @@ void		Human::switchCloth(void)
 		_colors[12] = Vec3(0.32f, 0.24f, 0.196f);
 		_colors[13] = Vec3(0.9960784314f, 0.7647058824f, 0.6745098039f);
 		_colors[14] = Vec3(0.9960784314f, 0.7647058824f, 0.6745098039f);
+		_parts[14].visible = !girl;
 	}
-	_parts[14].visible = !cloth;
 }
 
 void 		Human::update(float delta)

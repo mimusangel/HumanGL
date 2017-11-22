@@ -1,4 +1,0 @@
-anim_manager.o: sources/anim_manager.cpp include/anim.hpp \
-  include/humangl.hpp /Users/jrouthie/.brew/include/GL/glew.h \
-  /Users/jrouthie/.brew/include/GLFW/glfw3.h \
-  libmmatrix/include/mmatrix.hpp
