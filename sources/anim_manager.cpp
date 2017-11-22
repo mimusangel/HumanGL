@@ -59,14 +59,80 @@ Anim	AnimManager::loadWalk(float speed)
 Anim	AnimManager::loadRun(float speed)
 {
 	Anim	anim(10);
+	anim.setLoop(true);
+	//bras
+	anim.addAnimPoint(2, speed * 0.5, Vec3(TORADIANS(60), 0, 0))
+		.addAnimPoint(2, speed * 1.5, Vec3(TORADIANS(-80), 0, 0))
+		.addAnimPoint(2, speed * 2, Vec3(0, 0, 0))
+		.addAnimPoint(3, speed * 0.5, Vec3(TORADIANS(-30), 0, 0))
+		.addAnimPoint(3, speed * 1.0, Vec3(0, 0, 0))
+		.addAnimPoint(3, speed * 1.5, Vec3(TORADIANS(-60), 0, 0))
+		.addAnimPoint(3, speed * 2.0, Vec3(0, 0, 0))
+		.addAnimPoint(6, speed * 0.5, Vec3(TORADIANS(-80), 0, 0))
+		.addAnimPoint(6, speed * 1.5, Vec3(TORADIANS(60), 0, 0))
+		.addAnimPoint(6, speed * 2, Vec3(0, 0, 0))
+		.addAnimPoint(7, speed * 0.5, Vec3(TORADIANS(-60), 0, 0))
+		.addAnimPoint(7, speed * 1.0, Vec3(0, 0, 0))
+		.addAnimPoint(7, speed * 1.5, Vec3(TORADIANS(-30), 0, 0))
+		.addAnimPoint(7, speed * 2.0, Vec3(0, 0, 0))
+	//jambe
+		.addAnimPoint(4, speed * 0.5, Vec3(TORADIANS(-80), 0, 0))
+		.addAnimPoint(4, speed * 1, Vec3(0, 0, 0))
+		.addAnimPoint(4, speed * 1.5, Vec3(TORADIANS(30), 0, 0))
+		.addAnimPoint(4, speed * 2, Vec3(0, 0, 0))
 
+		.addAnimPoint(5, speed * 0.5, Vec3(TORADIANS(60), 0, 0))
+		.addAnimPoint(5, speed * 1, Vec3(0, 0, 0))
+		.addAnimPoint(5, speed * 1.5, Vec3(TORADIANS(60), 0, 0))
+		.addAnimPoint(5, speed * 2, Vec3(0, 0, 0))
+
+		.addAnimPoint(8, speed * 0.5, Vec3(TORADIANS(60), 0, 0))
+		.addAnimPoint(8, speed * 1, Vec3(0, 0, 0))
+		.addAnimPoint(8, speed * 1.5, Vec3(TORADIANS(-80), 0, 0))
+		.addAnimPoint(8, speed * 2, Vec3(0, 0, 0))
+
+		.addAnimPoint(9, speed * 0.5, Vec3(TORADIANS(60), 0, 0))
+		.addAnimPoint(9, speed * 1, Vec3(0, 0, 0))
+		.addAnimPoint(9, speed * 1.5, Vec3(TORADIANS(60), 0, 0))
+		.addAnimPoint(9, speed * 2, Vec3(0, 0, 0))
+	;
 	return (anim);
 }
 
 Anim	AnimManager::loadJump(float speed)
 {
 	Anim	anim(10);
-
+	anim.addAnimPoint(-1, speed * 1.f, Vec3(0.f, -0.1f, 0.0f))
+		.addAnimPoint(-1, speed * 4.f, Vec3(0.f, 0.5f, 0.f))
+		.addAnimPoint(-1, speed * 6.f, Vec3(0.f, 0.f, 0.f))
+		.addAnimPoint(0, speed * 1.f, Vec3(TORADIANS(5.f), 0.f, 0.0f))
+		.addAnimPoint(0, speed * 4.f, Vec3(TORADIANS(10.f), 0.f, 0.0f))
+		.addAnimPoint(0, speed * 6.f, Vec3(0.f, 0.f, 0.0f))
+		.addAnimPoint(2, speed * 1.f, Vec3(TORADIANS(-15.f), TORADIANS(-20.f), 0.0f))
+		.addAnimPoint(2, speed * 4.f, Vec3(TORADIANS(-150.f), 0.f, 0.0f))
+		.addAnimPoint(2, speed * 6.f, Vec3(0.f, 0.f, 0.0f))
+		.addAnimPoint(3, speed * 1.f, Vec3(TORADIANS(-15.f), 0.f, 0.0f))
+		.addAnimPoint(3, speed * 4.f, Vec3(TORADIANS(-5.f), 0.f, 0.0f))
+		.addAnimPoint(3, speed * 6.f, Vec3(0.f, 0.f, 0.0f))
+		.addAnimPoint(4, speed * 1.f, Vec3(TORADIANS(-15.f), TORADIANS(-15.f), 0.0f))
+		.addAnimPoint(4, speed * 4.f, Vec3(TORADIANS(5.f), TORADIANS(-15.f), 0.0f))
+		.addAnimPoint(4, speed * 6.f, Vec3(0.f, 0.f, 0.0f))
+		.addAnimPoint(5, speed * 1.f, Vec3(TORADIANS(12.f), 0.f, 0.0f))
+		.addAnimPoint(5, speed * 4.f, Vec3(TORADIANS(20.f), 0.f, 0.0f))
+		.addAnimPoint(5, speed * 6.f, Vec3(0.f, 0.f, 0.0f))
+		.addAnimPoint(6, speed * 1.f, Vec3(TORADIANS(-15.f), TORADIANS(20.f), 0.0f))
+		.addAnimPoint(6, speed * 4.f, Vec3(TORADIANS(-150.f), 0.f, 0.0f))
+		.addAnimPoint(6, speed * 6.f, Vec3(0.f, 0.f, 0.0f))
+		.addAnimPoint(7, speed * 1.f, Vec3(TORADIANS(-15.f), 0.f, 0.0f))
+		.addAnimPoint(7, speed * 4.f, Vec3(TORADIANS(-5.f), 0.f, 0.0f))
+		.addAnimPoint(7, speed * 6.f, Vec3(0.f, 0.f, 0.0f))
+		.addAnimPoint(8, speed * 1.f, Vec3(TORADIANS(-15.f), TORADIANS(15.f), 0.0f))
+		.addAnimPoint(8, speed * 4.f, Vec3(TORADIANS(5.f), TORADIANS(-15.f), 0.0f))
+		.addAnimPoint(8, speed * 6.f, Vec3(0.f, 0.f, 0.0f))
+		.addAnimPoint(9, speed * 1.f, Vec3(TORADIANS(12.f), 0.f, 0.0f))
+		.addAnimPoint(9, speed * 4.f, Vec3(TORADIANS(20.f), 0.f, 0.0f))
+		.addAnimPoint(9, speed * 6.f, Vec3(0.f, 0.f, 0.0f))
+	;
 	return (anim);
 }
 
@@ -80,7 +146,29 @@ Anim	AnimManager::loadTwerk(float speed)
 Anim	AnimManager::loadCrouch(float speed)
 {
 	Anim	anim(10);
-
+	anim.addAnimPoint(-1, speed * 2.f, Vec3(0.f, -0.08f, 0.0f))
+		.addAnimPoint(-1, speed * 4.f, Vec3(0.f, 0.f, 0.0f))
+		.addAnimPoint(0, speed * 2.f, Vec3(TORADIANS(15.f), 0.f, 0.0f))
+		.addAnimPoint(0, speed * 4.f, Vec3(0.f, 0.f, 0.0f))
+		.addAnimPoint(1, speed * 2.f, Vec3(TORADIANS(-20.f), 0.f, 0.0f))
+		.addAnimPoint(1, speed * 4.f, Vec3(0.f, 0.f, 0.0f))
+		.addAnimPoint(2, speed * 2.f, Vec3(TORADIANS(20.f), 0.f, 0.0f))
+		.addAnimPoint(2, speed * 4.f, Vec3(0.f, 0.f, 0.0f))
+		.addAnimPoint(3, speed * 2.f, Vec3(TORADIANS(-50.f), 0.f, 0.0f))
+		.addAnimPoint(3, speed * 4.f, Vec3(0.f, 0.f, 0.0f))
+		.addAnimPoint(4, speed * 2.f, Vec3(TORADIANS(-80.f), 0.f, 0.0f))
+		.addAnimPoint(4, speed * 4.f, Vec3(0.f, 0.f, 0.0f))
+		.addAnimPoint(5, speed * 2.f, Vec3(TORADIANS(80.f), 0.f, 0.0f))
+		.addAnimPoint(5, speed * 4.f, Vec3(0.f, 0.f, 0.0f))
+		.addAnimPoint(6, speed * 2.f, Vec3(TORADIANS(-10.f), 0.f, 0.0f))
+		.addAnimPoint(6, speed * 4.f, Vec3(0.f, 0.f, 0.0f))
+		.addAnimPoint(7, speed * 2.f, Vec3(TORADIANS(-40.f), 0.f, 0.0f))
+		.addAnimPoint(7, speed * 4.f, Vec3(0.f, 0.f, 0.0f))
+		.addAnimPoint(8, speed * 2.f, Vec3(TORADIANS(-50.f), 0.f, 0.0f))
+		.addAnimPoint(8, speed * 4.f, Vec3(0.f, 0.f, 0.0f))
+		.addAnimPoint(9, speed * 2.f, Vec3(TORADIANS(100.f), 0.f, 0.0f))
+		.addAnimPoint(9, speed * 4.f, Vec3(0.f, 0.f, 0.0f))
+	;
 	return (anim);
 }
 
