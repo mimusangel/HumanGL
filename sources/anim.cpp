@@ -6,7 +6,6 @@ Anim::AnimPoint::AnimPoint(const double tm, const Vec3 &rot) :
 {
 	_next = nullptr;
 }
-
 Anim::AnimPoint::~AnimPoint()
 {
 	if (_next != nullptr)
@@ -15,13 +14,11 @@ Anim::AnimPoint::~AnimPoint()
 		_next = nullptr;
 	}
 }
-
 Anim::Anim(int numArticul)
 {
 	_anim = new AnimPoint[numArticul + 1];
 	_numArticul = numArticul;
 }
-
 Anim::~Anim(void)
 {
 	delete[] _anim;
@@ -56,14 +53,16 @@ void	Anim::getAnim(int id, const double ttm, Vec3 &rot)
 	}
 	rot = Vec3();
 }
-
 bool	Anim::isFinish(const double tm)
 {
 	if (_loop)
 		return (false);
 	return (tm > _tmEnd);
 }
-
+int		Anim::getNumArticul(void)
+{
+	return (_numArticul);
+}
 Anim	&Anim::setLoop(bool ok)
 {
 	_loop = ok;
