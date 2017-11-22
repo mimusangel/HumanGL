@@ -115,6 +115,16 @@ void	Cube::render(Shaders &shader, const Vec3 &color)
 	Cube::Render();
 }
 
+Vec3	&Cube::getRot(void)
+{
+	return (_rotate);
+}
+
+Vec3	&Cube::getPos(void)
+{
+	return (_position);
+}
+
 Vec3	&Cube::getScale(void)
 {
 	return (_scale);

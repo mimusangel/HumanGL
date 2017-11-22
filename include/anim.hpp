@@ -12,19 +12,20 @@ private:
 	public:
 		double		_tm;
 		Vec3		_angle;
-		Vec3		_pos;
 		AnimPoint	*_next;
-		AnimPoint(const double tm = 0.0, const Vec3 &rot = Vec3(), const Vec3 &pos = Vec3());
+		AnimPoint(const double tm = 0.0, const Vec3 &rot = Vec3());
 	};
-	AnimPoint	*_anim[];
+	AnimPoint	*_anim;
 	int			_numArticul;
-	double		_start;
+	double		_tmEnd;
+	bool		_loop;
 public:
 	Anim(int numArticul);
 	~Anim(void);
-	void	addAnimPoint(int id, const double tm, const Vec3 &rot = Vec3(), const Vec3 &pos = Vec3());
-	void	getAnim(int id, const double tm, Vec3 &rot, Vec3 &pos);
-	// void	update(double tm, Anim &anim);
+	void	addAnimPoint(int id, const double tm, const Vec3 &rot = Vec3());
+	void	getAnim(int id, const double tm, Vec3 &rot);
+	bool	isFinish(const double tm);
+	void	setLoop(bool ok);
 };
 
 #endif

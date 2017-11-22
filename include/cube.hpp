@@ -28,6 +28,8 @@ public:
 	Mat4x4	toMatrix(const bool isChild = false);
 	Cube	&setRotate(const Vec3 &rot);
 	void	render(Shaders &shader, const Vec3 &color = Vec3(1.f));
+	Vec3	&getRot(void);
+	Vec3	&getPos(void);
 	Vec3	&getScale(void);
 	Cube	&translate(const Vec3 &pos);
 };

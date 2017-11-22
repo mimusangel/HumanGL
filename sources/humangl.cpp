@@ -9,6 +9,7 @@ using namespace std;
 #include "camera.hpp"
 #include "cube.hpp"
 #include "human.hpp"
+#include "anim.hpp"
 using namespace mmatrix;
 
 int main()
@@ -38,13 +39,27 @@ int main()
 			Cube::Load();
 			Human human;
 			Camera	cam(win);
+			Anim	anim(10);
+			anim.setLoop(true);
 
+			anim.addAnimPoint(-1, 1, Vec3(0, 0, 1));
+			anim.addAnimPoint(-1, 2, Vec3(0, 0, 0));
+			anim.addAnimPoint(0, 1, Vec3(0, TORADIANS(90), 0));
+			anim.addAnimPoint(0, 2, Vec3(0, TORADIANS(0), 0));
+			anim.addAnimPoint(2, 1, Vec3(0, 0, TORADIANS(-90)));
+			anim.addAnimPoint(2, 2, Vec3(0, 0, TORADIANS(0)));
+			anim.addAnimPoint(3, 1, Vec3(0, 0, TORADIANS(90)));
+			anim.addAnimPoint(3, 2, Vec3(0, 0, TORADIANS(0)));
+			human.setAnim(&anim);
 			cam.translate(Vec3(0, 0, -2));
 			while (win.isOpen())
 			{
 				/* ******************** */
 				/* * UPDATE           * */
 				/* ******************** */
+				if (glfwGetMouseButton(win.getGLFW(), GLFW_MOUSE_BUTTON_MIDDLE) == GLFW_PRESS)
+					human.setAnim(&anim);
+
 				cam.move();
 				if (glfwGetMouseButton(win.getGLFW(), GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS ||
 					win.isGrabbed())

@@ -34,5 +34,22 @@ void		Human::render(Shaders &shader)
 
 void 		Human::update(float delta)
 {
+	const double	tm = delta - _animStart;
 
+	if (_anim)
+	{
+		_anim->getAnim(-1, tm, _parts[0].getPos());
+		for (int i = 0; i < 10; i++)
+		{
+			_anim->getAnim(i, tm, _parts[i].getRot());
+		}
+		if (_anim->isFinish(tm))
+			_anim = nullptr;
+	}
+}
+
+void 		Human::setAnim(Anim *anim)
+{
+	_anim = anim;
+	_animStart = glfwGetTime();
 }

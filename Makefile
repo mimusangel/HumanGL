@@ -19,7 +19,8 @@ SRC = \
 	transform.cpp \
 	camera.cpp \
 	cube.cpp \
-	human.cpp
+	human.cpp \
+	anim.cpp
 
 
 
