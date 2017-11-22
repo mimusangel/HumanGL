@@ -2,7 +2,7 @@
 # define WINDOW_HPP
 
 # include "humangl.hpp"
-
+# include "human.hpp"
 class Window {
 
 private:
@@ -17,6 +17,7 @@ public:
 	mmatrix::Vec2		dirMouse;
 	mmatrix::Vec2		dirMouseSmooth;
 	mmatrix::Mat4x4		matProjection;
+	Human				*human;
 	Window(int width, int height, std::string title);
 	~Window();
 	std::string			&getError(void);

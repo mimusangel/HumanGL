@@ -26,7 +26,7 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 		{
 			win->setGrab(true);
 		}
-		if (key == GLFW_KEY_F)
+		else if (key == GLFW_KEY_F)
 		{
 			GLint polygonMode;
 			glGetIntegerv(GL_POLYGON_MODE, &polygonMode);
@@ -41,6 +41,16 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 				glDisable(GL_CULL_FACE);
 			}
+		}
+		else if (key == GLFW_KEY_G)
+		{
+			if (win->human != nullptr)
+				win->human->switchGender();
+		}
+		else if (key == GLFW_KEY_N)
+		{
+			if (win->human != nullptr)
+				win->human->switchCloth();
 		}
 	}
 }
@@ -83,7 +93,7 @@ static void win_resize_callback(GLFWwindow *window, int width, int height)
 ** Class Window
 */
 
-Window::Window(int width, int height, std::string title) : _grab(false), mouse(0), dirMouse(0)
+Window::Window(int width, int height, std::string title) : _grab(false), mouse(0), dirMouse(0), human(nullptr)
 {
 	glfwWindowHint(GLFW_SAMPLES, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);

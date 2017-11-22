@@ -52,6 +52,7 @@ int main()
 			human.setAnim(&animList[0]);
 			cam.translate(Vec3(2, 1.5, 2));
 			cam.setRotateEuler(Vec3(TORADIANS(-135), TORADIANS(30), 0));
+			win.human = &human;
 			while (win.isOpen())
 			{
 				/* ******************** */
@@ -68,7 +69,10 @@ int main()
 				if (glfwGetKey(win.getGLFW(), GLFW_KEY_5))
 					human.setAnim(animList + 4);
 				if (glfwGetKey(win.getGLFW(), GLFW_KEY_6))
+				{
 					human.setAnim(animList + 5);
+					human.getParts(14).getRot() = Vec3(TORADIANS(-45.f), 0.0f, 0.0f);
+				}
 				if (glfwGetKey(win.getGLFW(), GLFW_KEY_7))
 					human.setAnim(animList + 6);
 				if (glfwGetKey(win.getGLFW(), GLFW_KEY_8))

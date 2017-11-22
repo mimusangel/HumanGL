@@ -23,6 +23,7 @@ private:
 	Cube	*_parent;
 
 public:
+	bool	visible;
 	Cube(const Vec3 &pos = Vec3(), const Vec3 &rot = Vec3(), const Vec3 &offset = Vec3(), const Vec3 &scale = Vec3(1.f));
 	Cube	&setParent(Cube *parent);
 	Mat4x4	toMatrix(const bool isChild = false);

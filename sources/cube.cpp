@@ -60,7 +60,7 @@ void		Cube::Unload(void)
 using namespace mmatrix;
 
 Cube::Cube(const Vec3 &pos, const Vec3 &rot, const Vec3 &offset, const Vec3 &scale) :
-	_position(pos), _rotate(rot), _offset(offset), _scale(scale), _parent(nullptr)
+	_position(pos), _rotate(rot), _offset(offset), _scale(scale), _parent(nullptr), visible(true)
 {}
 
 Cube	&Cube::setParent(Cube *parent)
