@@ -40,6 +40,18 @@ int main()
 			Human human;
 			Camera	cam(win);
 			// Anim	anim(10);
+			Anim	animList[10] = {
+				AnimManager::loadIdle(),
+				AnimManager::loadWalk(0.2),
+				AnimManager::loadRun(),
+				AnimManager::loadJump(),
+				AnimManager::loadTwerk(),
+				AnimManager::loadCrouch(),
+				AnimManager::loadMasturbate(),
+				AnimManager::loadExorciste(),
+				AnimManager::loadNeo(),
+				AnimManager::loadCloClo()
+			};
 			Anim	anim = AnimManager::loadWalk(0.2);
 			// Anim	anim = AnimManager::loadNeo();
 			anim.setLoop(true);
@@ -53,6 +65,7 @@ int main()
 			anim.addAnimPoint(3, 1, Vec3(0, 0, TORADIANS(90)));
 			anim.addAnimPoint(3, 2, Vec3(0, 0, TORADIANS(0)));*/
 			human.setAnim(&anim);
+			human.setAnim(&animList[0]);
 			cam.translate(Vec3(2, 1.5, 2));
 			cam.setRotateEuler(Vec3(TORADIANS(-135), TORADIANS(30), 0));
 			while (win.isOpen())
