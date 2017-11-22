@@ -20,7 +20,8 @@ SRC = \
 	camera.cpp \
 	cube.cpp \
 	human.cpp \
-	anim.cpp
+	anim.cpp \
+	anim_manager.cpp
 
 
 

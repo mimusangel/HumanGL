@@ -1,4 +1,3 @@
-#include <iostream>
 #include <cmath>
 #include "anim.hpp"
 
@@ -27,7 +26,7 @@ Anim::~Anim(void)
 {
 	delete[] _anim;
 }
-void	Anim::addAnimPoint(int id, const double tm, const Vec3 &rot)
+Anim	&Anim::addAnimPoint(int id, const double tm, const Vec3 &rot)
 {
 	AnimPoint	*a = _anim + id + 1;
 
@@ -36,6 +35,7 @@ void	Anim::addAnimPoint(int id, const double tm, const Vec3 &rot)
 	a->_next = new AnimPoint(tm, rot);
 	if (tm > _tmEnd)
 		_tmEnd = tm;
+	return (*this);
 }
 void	Anim::getAnim(int id, const double ttm, Vec3 &rot)
 {

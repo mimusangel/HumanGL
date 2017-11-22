@@ -23,10 +23,24 @@ private:
 public:
 	Anim(int numArticul);
 	~Anim(void);
-	void	addAnimPoint(int id, const double tm, const Vec3 &rot = Vec3());
+	Anim	&addAnimPoint(int id, const double tm, const Vec3 &rot = Vec3());
 	void	getAnim(int id, const double tm, Vec3 &rot);
 	bool	isFinish(const double tm);
 	void	setLoop(bool ok);
+};
+
+class AnimManager {
+public:
+	static Anim	loadIdle();
+	static Anim	loadWalk();
+	static Anim	loadRun();
+	static Anim	loadJump();
+	static Anim	loadTwerk();
+	static Anim	loadCrouch();
+	static Anim	loadMasturbate();
+	static Anim loadExorciste();
+	static Anim loadNeo();
+	static Anim loadCloClo();
 };
 
 #endif
