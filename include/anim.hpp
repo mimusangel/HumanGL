@@ -31,16 +31,16 @@ public:
 
 class AnimManager {
 public:
-	static Anim	loadIdle();
-	static Anim	loadWalk();
-	static Anim	loadRun();
-	static Anim	loadJump();
-	static Anim	loadTwerk();
-	static Anim	loadCrouch();
-	static Anim	loadMasturbate();
-	static Anim loadExorciste();
-	static Anim loadNeo();
-	static Anim loadCloClo();
+	static Anim	loadIdle(float speed = 1.0f);
+	static Anim	loadWalk(float speed = 1.0f);
+	static Anim	loadRun(float speed = 1.0f);
+	static Anim	loadJump(float speed = 1.0f);
+	static Anim	loadTwerk(float speed = 1.0f);
+	static Anim	loadCrouch(float speed = 1.0f);
+	static Anim	loadMasturbate(float speed = 1.0f);
+	static Anim loadExorciste(float speed = 1.0f);
+	static Anim loadNeo(float speed = 1.0f);
+	static Anim loadCloClo(float speed = 1.0f);
 };
 
 #endif
