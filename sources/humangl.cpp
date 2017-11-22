@@ -42,7 +42,7 @@ int main()
 			// Anim	anim(10);
 			Anim	anim = AnimManager::loadWalk(0.2);
 			// Anim	anim = AnimManager::loadNeo();
-			// anim.setLoop(true);
+			anim.setLoop(true);
 
 			/*anim.addAnimPoint(-1, 1, Vec3(0, 0, 1));
 			anim.addAnimPoint(-1, 2, Vec3(0, 0, 0));
