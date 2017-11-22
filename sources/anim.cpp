@@ -1,4 +1,4 @@
-
+#include <iostream>
 #include <cmath>
 #include "anim.hpp"
 
@@ -8,28 +8,24 @@ Anim::AnimPoint::AnimPoint(const double tm, const Vec3 &rot) :
 	_next = nullptr;
 }
 
+Anim::AnimPoint::~AnimPoint()
+{
+	if (_next != nullptr)
+	{
+		delete _next;
+		_next = nullptr;
+	}
+}
 
 Anim::Anim(int numArticul)
 {
 	_anim = new AnimPoint[numArticul + 1];
 	_numArticul = numArticul;
 }
+
 Anim::~Anim(void)
 {
-	AnimPoint	*a;
-	AnimPoint	*t;
-
-	for (int i = 0; i < _numArticul; i++)
-	{
-		a = _anim + i;
-		while (a->_next)
-		{
-			t = a;
-			a = a->_next;
-			delete t;
-		}
-	}
-	delete _anim;
+	delete[] _anim;
 }
 void	Anim::addAnimPoint(int id, const double tm, const Vec3 &rot)
 {

@@ -14,6 +14,7 @@ private:
 		Vec3		_angle;
 		AnimPoint	*_next;
 		AnimPoint(const double tm = 0.0, const Vec3 &rot = Vec3());
+		~AnimPoint();
 	};
 	AnimPoint	*_anim;
 	int			_numArticul;
