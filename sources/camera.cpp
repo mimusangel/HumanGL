@@ -6,8 +6,7 @@ Camera::Camera(Window &win, const Vec3 &pos, const Quat &rot) :
 {
 	_win = &win;
 }
-
-void		Camera::move(void)
+Camera		&Camera::move(void)
 {
 	GLFWwindow	*win = _win->getGLFW();
 
@@ -30,6 +29,22 @@ void		Camera::move(void)
 	else
 		pos *= 0.01f;
 	this->translate(pos);
+	return (*this);
+}
+Camera		&Camera::setRotateEuler(const Vec3 &euler)
+{
+	_euler = euler;
+	setRotate(_euler);
+	return (*this);
+}
+Camera		&Camera::rotateEuler(const Vec3 &euler)
+{
+	if (Vec3(0) != euler)
+	{
+		_euler += euler;
+		setRotate(_euler);
+	}
+	return (*this);
 }
 Camera		&Camera::translate(const Vec3 &value)
 {

@@ -53,7 +53,8 @@ int main()
 			anim.addAnimPoint(3, 1, Vec3(0, 0, TORADIANS(90)));
 			anim.addAnimPoint(3, 2, Vec3(0, 0, TORADIANS(0)));*/
 			human.setAnim(&anim);
-			cam.translate(Vec3(0, 0, -2));
+			cam.translate(Vec3(2, 1.5, 2));
+			cam.setRotateEuler(Vec3(TORADIANS(-135), TORADIANS(30), 0));
 			while (win.isOpen())
 			{
 				/* ******************** */
@@ -65,15 +66,7 @@ int main()
 				cam.move();
 				if (glfwGetMouseButton(win.getGLFW(), GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS ||
 					win.isGrabbed())
-				{
-					if (win.dirMouseSmooth != Vec2(0))
-					{
-						static Vec2	euler;
-						euler += win.dirMouseSmooth;
-						win.dirMouseSmooth = Vec2(0);
-						cam.setRotate(Vec3(TORADIANS(euler), 0));
-					}
-				}
+					cam.rotateEuler(Vec3(TORADIANS(win.dirMouse), 0));
 				human.update(glfwGetTime());
 				/* ******************** */
 				/* * RENDU            * */
