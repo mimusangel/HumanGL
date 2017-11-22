@@ -26,6 +26,22 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 		{
 			win->setGrab(true);
 		}
+		if (key == GLFW_KEY_F)
+		{
+			GLint polygonMode;
+			glGetIntegerv(GL_POLYGON_MODE, &polygonMode);
+			if (polygonMode == GL_LINE)
+			{
+				glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+				glEnable(GL_CULL_FACE);
+				glCullFace(GL_FRONT);
+			}
+			else if (polygonMode == GL_FILL)
+			{
+				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+				glDisable(GL_CULL_FACE);
+			}
+		}
 	}
 }
 

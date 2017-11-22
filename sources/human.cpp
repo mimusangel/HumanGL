@@ -3,16 +3,17 @@ using namespace mmatrix;
 
 Human::Human(void)
 {
-	_parts[0] = Cube(Vec3(0, 0.375f, 0),Vec3(),	Vec3(0.0f, 0.5f, 0.0f),	Vec3(0.25f, 0.375f, 0.125f));
-	_parts[1] = Cube(Vec3(0, 1, 0),		Vec3(), Vec3(0.0f, 0.5f, 0.0f),	Vec3(0.25f)).setParent(_parts);
-	_parts[2] = Cube(Vec3(-0.5, 1, 0),	Vec3(),	Vec3(-0.5, -0.5, 0.f),	Vec3(0.1248f, 0.1875f, 0.1248f)).setParent(_parts);
-	_parts[3] = Cube(Vec3(-0.5, -1, 0),	Vec3(),	Vec3(0, -0.5, 0), 		Vec3(0.1246f, 0.1875f, 0.1246f)).setParent(_parts + 2);
-	_parts[4] = Cube(Vec3(-0.25, 0, 0),	Vec3(),	Vec3(0, -0.5, 0.f),		Vec3(0.1248f, 0.1875f, 0.1248f)).setParent(_parts);
-	_parts[5] = Cube(Vec3(0, -1, 0),	Vec3(),	Vec3(0, -0.5, 0),		Vec3(0.1246f, 0.1875f, 0.1246f)).setParent(_parts + 4);
-	_parts[6] = Cube(Vec3(0.5, 1, 0),	Vec3(),	Vec3(0.5, -0.5, 0.f),	Vec3(0.1248f, 0.1875f, 0.1248f)).setParent(_parts);
-	_parts[7] = Cube(Vec3(0.5, -1, 0),	Vec3(),	Vec3(0, -0.5, 0),		Vec3(0.1246f, 0.1875f, 0.1246f)).setParent(_parts + 6);
-	_parts[8] = Cube(Vec3(0.25, 0, 0),	Vec3(),	Vec3(0, -0.5, 0.f),		Vec3(0.1248f, 0.1875f, 0.1248f)).setParent(_parts);
-	_parts[9] = Cube(Vec3(0, -1, 0),	Vec3(),	Vec3(0, -0.5, 0),		Vec3(0.1246f, 0.1875f, 0.1246f)).setParent(_parts + 8);
+	_parts[0] = Cube(Vec3(0, 0.375f, 0),Vec3(),	Vec3(0.0f, 0.5f, 0.0f),	HUMAN_BODY);
+	_parts[1] = Cube(Vec3(0, 1, 0),		Vec3(), Vec3(0.0f, 0.5f, 0.0f),	HUMAN_HEAD).setParent(_parts);
+	_parts[2] = Cube(Vec3(-0.5, 1, 0),	Vec3(),	Vec3(-0.5, -0.5, 0.f),	HUMAN_LEFT_ARM_UP).setParent(_parts);
+	_parts[3] = Cube(Vec3(-0.5, -1, 0),	Vec3(),	Vec3(0, -0.5, 0), 		HUMAN_LEFT_ARM_DOWN).setParent(_parts + 2);
+	_parts[4] = Cube(Vec3(-0.25, 0, 0),	Vec3(),	Vec3(0, -0.5, 0.f),		HUMAN_LEFT_FOOT_UP).setParent(_parts);
+	_parts[5] = Cube(Vec3(0, -1, 0),	Vec3(),	Vec3(0, -0.5, 0),		HUMAN_LEFT_FOOT_DOWN).setParent(_parts + 4);
+	_parts[6] = Cube(Vec3(0.5, 1, 0),	Vec3(),	Vec3(0.5, -0.5, 0.f),	HUMAN_RIGHT_ARM_UP).setParent(_parts);
+	_parts[7] = Cube(Vec3(0.5, -1, 0),	Vec3(),	Vec3(0, -0.5, 0),		HUMAN_RIGHT_ARM_DOWN).setParent(_parts + 6);
+	_parts[8] = Cube(Vec3(0.25, 0, 0),	Vec3(),	Vec3(0, -0.5, 0.f),		HUMAN_RIGHT_FOOT_UP).setParent(_parts);
+	_parts[9] = Cube(Vec3(0, -1, 0),	Vec3(),	Vec3(0, -0.5, 0),		HUMAN_RIGHT_FOOT_DOWN).setParent(_parts + 8);
+	
 	_colors[0] = Vec3(0.5f, 0.f, 0.f);
 	_colors[1] = Vec3(0.9960784314f, 0.7647058824f, 0.6745098039f);
 	_colors[2] = Vec3(0.5f, 0.f, 0.f);
@@ -51,4 +52,10 @@ void 		Human::setAnim(Anim *anim)
 {
 	_anim = anim;
 	_animStart = glfwGetTime();
+	if (_anim == nullptr)
+	{
+		for (size_t i = 0; i < 10; i++)
+			_parts[i].getRot() = Vec3();
+		_parts[0].getPos() = Vec3();
+	}
 }

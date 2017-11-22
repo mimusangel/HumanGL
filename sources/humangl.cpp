@@ -39,7 +39,6 @@ int main()
 			Cube::Load();
 			Human human;
 			Camera	cam(win);
-			// Anim	anim(10);
 			Anim	animList[8] = {
 				AnimManager::loadIdle(0.5),
 				AnimManager::loadWalk(0.2),
@@ -50,10 +49,6 @@ int main()
 				AnimManager::loadNeo(),
 				AnimManager::loadCloClo(0.5)
 			};
-			// Anim	anim = AnimManager::loadWalk(0.2);
-			// Anim	anim = AnimManager::loadNeo();
-			// anim.setLoop(true);
-			// human.setAnim(&anim);
 			human.setAnim(&animList[0]);
 			cam.translate(Vec3(2, 1.5, 2));
 			cam.setRotateEuler(Vec3(TORADIANS(-135), TORADIANS(30), 0));
@@ -78,10 +73,8 @@ int main()
 					human.setAnim(animList + 6);
 				if (glfwGetKey(win.getGLFW(), GLFW_KEY_8))
 					human.setAnim(animList + 7);
-
-				// if (glfwGetMouseButton(win.getGLFW(), GLFW_MOUSE_BUTTON_MIDDLE) == GLFW_PRESS)
-				// 	human.setAnim(&anim);
-
+				if (glfwGetKey(win.getGLFW(), GLFW_KEY_9))
+					human.setAnim(nullptr);
 				cam.move();
 				if (glfwGetMouseButton(win.getGLFW(), GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS ||
 					win.isGrabbed())
