@@ -41,14 +41,14 @@ int main()
 			Camera	cam(win);
 			// Anim	anim(10);
 			Anim	animList[8] = {
-				AnimManager::loadIdle(),
+				AnimManager::loadIdle(0.5),
 				AnimManager::loadWalk(0.2),
-				AnimManager::loadRun(),
-				AnimManager::loadJump(),
-				AnimManager::loadCrouch(),
-				AnimManager::loadMasturbate(),
+				AnimManager::loadRun(0.2),
+				AnimManager::loadJump(0.2),
+				AnimManager::loadCrouch(0.5),
+				AnimManager::loadMasturbate(0.2),
 				AnimManager::loadNeo(),
-				AnimManager::loadCloClo()
+				AnimManager::loadCloClo(0.5)
 			};
 			// Anim	anim = AnimManager::loadWalk(0.2);
 			// Anim	anim = AnimManager::loadNeo();
