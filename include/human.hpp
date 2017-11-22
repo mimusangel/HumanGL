@@ -7,16 +7,8 @@
 
 class Human {
 private:
-	Cube _body;
-	Cube _head;
-	Cube _leftArmUp;
-	Cube _leftArmDown;
-	Cube _leftLegUp;
-	Cube _leftLegDown;
-	Cube _rightArmUp;
-	Cube _rightArmDown;
-	Cube _rightLegUp;
-	Cube _rightLegDown;
+	Cube _parts[10];
+	Vec3 _colors[10];
 public:
 	Human(void);
 	void		render(Shaders &shader);
