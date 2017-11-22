@@ -30,17 +30,16 @@ int main()
 				return (0);
 			if (!sample.build())
 				return (0);
-			Cube::Load();
-			Human human;
 
 			glEnable(GL_DEPTH_TEST);
 			glEnable(GL_CULL_FACE);
 			glCullFace(GL_FRONT);
+
+			Cube::Load();
+			Human human;
 			Camera	cam(win);
 
 			cam.translate(Vec3(0, 0, -2));
-			Vec3 right(1, 0, 0);
-			Vec3 up(0, 1, 0);
 			while (win.isOpen())
 			{
 				/* ******************** */
