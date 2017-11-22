@@ -50,19 +50,10 @@ int main()
 				AnimManager::loadNeo(),
 				AnimManager::loadCloClo()
 			};
-			Anim	anim = AnimManager::loadWalk(0.2);
+			// Anim	anim = AnimManager::loadWalk(0.2);
 			// Anim	anim = AnimManager::loadNeo();
-			anim.setLoop(true);
-
-			/*anim.addAnimPoint(-1, 1, Vec3(0, 0, 1));
-			anim.addAnimPoint(-1, 2, Vec3(0, 0, 0));
-			anim.addAnimPoint(0, 1, Vec3(0, TORADIANS(90), 0));
-			anim.addAnimPoint(0, 2, Vec3(0, TORADIANS(0), 0));
-			anim.addAnimPoint(2, 1, Vec3(0, 0, TORADIANS(-90)));
-			anim.addAnimPoint(2, 2, Vec3(0, 0, TORADIANS(0)));
-			anim.addAnimPoint(3, 1, Vec3(0, 0, TORADIANS(90)));
-			anim.addAnimPoint(3, 2, Vec3(0, 0, TORADIANS(0)));*/
-			human.setAnim(&anim);
+			// anim.setLoop(true);
+			// human.setAnim(&anim);
 			human.setAnim(&animList[0]);
 			cam.translate(Vec3(2, 1.5, 2));
 			cam.setRotateEuler(Vec3(TORADIANS(-135), TORADIANS(30), 0));
@@ -71,8 +62,25 @@ int main()
 				/* ******************** */
 				/* * UPDATE           * */
 				/* ******************** */
-				if (glfwGetMouseButton(win.getGLFW(), GLFW_MOUSE_BUTTON_MIDDLE) == GLFW_PRESS)
-					human.setAnim(&anim);
+				if (glfwGetKey(win.getGLFW(), GLFW_KEY_1))
+					human.setAnim(animList);
+				if (glfwGetKey(win.getGLFW(), GLFW_KEY_2))
+					human.setAnim(animList + 1);
+				if (glfwGetKey(win.getGLFW(), GLFW_KEY_3))
+					human.setAnim(animList + 2);
+				if (glfwGetKey(win.getGLFW(), GLFW_KEY_4))
+					human.setAnim(animList + 3);
+				if (glfwGetKey(win.getGLFW(), GLFW_KEY_5))
+					human.setAnim(animList + 4);
+				if (glfwGetKey(win.getGLFW(), GLFW_KEY_6))
+					human.setAnim(animList + 5);
+				if (glfwGetKey(win.getGLFW(), GLFW_KEY_7))
+					human.setAnim(animList + 6);
+				if (glfwGetKey(win.getGLFW(), GLFW_KEY_8))
+					human.setAnim(animList + 7);
+
+				// if (glfwGetMouseButton(win.getGLFW(), GLFW_MOUSE_BUTTON_MIDDLE) == GLFW_PRESS)
+				// 	human.setAnim(&anim);
 
 				cam.move();
 				if (glfwGetMouseButton(win.getGLFW(), GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS ||
